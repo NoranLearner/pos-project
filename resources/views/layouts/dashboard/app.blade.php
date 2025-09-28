@@ -205,37 +205,45 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="user-image"
                                     alt="User Image">
-                                <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                                {{-- <span class="hidden-xs">{{ Auth::user()->name }}</span> --}}
                             </a>
                             <ul class="dropdown-menu">
 
                                 {{--<!-- User image -->--}}
                                 <li class="user-header">
-                                    <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle"
-                                        alt="User Image">
-
-                                    <p>
-                                        {{ Auth::user()->name }}<br/>{{ Auth::user()->email }}
-                                        <small>Member since 2 days</small>
-                                    </p>
+                                    <div
+                                        style="display: flex; align-items: center; margin-top: 10px; margin-bottom: 10px;">
+                                        <div style="width: 40%; margin-right: 10px; margin-left: 10px;">
+                                            <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}"
+                                                class="img-circle" alt="User Image" style="width: 100%; height: auto;">
+                                        </div>
+                                        <div style="width: 60%;">
+                                            <h4 style="color: white;">{{ Auth::user()->name }}</h4>
+                                            {{-- <span>{{ __('main.user_role') }}</span> --}}
+                                            <span style="color: orange;">Member since 2days</span>
+                                        </div>
+                                    </div>
+                                    <a href="{{ url('/profile') }}"
+                                        style="background-color: rgb(133, 92, 17); color: white; padding: 5px 10px; border-radius: 5px; text-decoration: none;">
+                                        {{ __('main.user_profile') }}
+                                    </a>
                                 </li>
 
                                 {{--<!-- Menu Footer-->--}}
                                 <li class="user-footer">
-
-
                                     <a href="{{ route('logout') }}" class="btn btn-default btn-flat"
-                                        onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">@lang('site.logout')</a>
-
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        {{ __('site.logout') }}
+                                    </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                         style="display: none;">
                                         @csrf
                                     </form>
-
                                 </li>
                             </ul>
+
                         </li>
+
                     </ul>
                 </div>
             </nav>
@@ -249,7 +257,8 @@
         @include('partials._session')
 
         <footer class="main-footer text-center">
-            <strong>Copyright &copy; 2025 <a href="https://adminlte.io">Almsaeed Studio</a>. </strong> All rights reserved.
+            <strong>Copyright &copy; 2025 <a href="https://adminlte.io">Almsaeed Studio</a>. </strong> All rights
+            reserved.
         </footer>
 
     </div><!-- end of wrapper -->
