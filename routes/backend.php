@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Dashboard\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,9 +20,7 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('dashboard')->name('dashboard.')->group(function () {
 
-    Route::get('/check', function () {
-        return view('dashboard.index');
-    })->name('index');
+    Route::get('/index', [DashboardController::class, 'index'])->name('index');
 
 }); // end of dashboard routes
 

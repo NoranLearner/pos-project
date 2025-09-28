@@ -225,7 +225,7 @@
                                     </div>
                                     <a href="{{ url('/profile') }}"
                                         style="background-color: rgb(133, 92, 17); color: white; padding: 5px 10px; border-radius: 5px; text-decoration: none;">
-                                        {{ __('main.user_profile') }}
+                                        {{ __('site.user_profile') }}
                                     </a>
                                 </li>
 
