@@ -19,7 +19,9 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('dashboard')->name('dashboard.')->group(function () {
 
-    
+    Route::get('/check', function () {
+        return view('dashboard.index');
+    })->name('index');
 
 }); // end of dashboard routes
 
