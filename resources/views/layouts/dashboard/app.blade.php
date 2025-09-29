@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 {{-- dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}" --}}
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    {{-- <title>AdminLTE 2 | Blank Page</title> --}}
-    <title>AdminLTE 2 | @yield('title')</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>AdminLTE | @yield('title')</title>
 
     {{--<!-- Bootstrap 3.3.7 -->--}}
     <link rel="stylesheet" href="{{ asset('dashboard_files/css/bootstrap.min.css') }}">
@@ -76,6 +76,7 @@
             }
         }
     </style>
+
     {{--<!-- jQuery 3 -->--}}
     <script src="{{ asset('dashboard_files/js/jquery.min.js') }}"></script>
 
@@ -92,6 +93,10 @@
     {{--html in ie--}}
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+    <!-- For Import Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
 
@@ -211,27 +216,24 @@
 
                                 {{--<!-- User image -->--}}
                                 <li class="user-header">
-                                    <div
-                                        style="display: flex; align-items: center; margin-top: 10px; margin-bottom: 10px;">
-                                        <div style="width: 40%; margin-right: 10px; margin-left: 10px;">
-                                            <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}"
-                                                class="img-circle" alt="User Image" style="width: 100%; height: auto;">
+                                    <div class="flex items-center my-4">
+                                        <div class="w-2/5 mx-4">
+                                            <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle w-full h-auto" alt="User Image">
                                         </div>
-                                        <div style="width: 60%;">
-                                            <h4 style="color: white;">{{ Auth::user()->name }}</h4>
+                                        <div class="w-3/5">
+                                            <h4 class="text-white">{{ Auth::user()->name }}</h4>
                                             {{-- <span>{{ __('main.user_role') }}</span> --}}
-                                            <span style="color: orange;">Member since 2days</span>
+                                            <span class="text-orange">Member since 2days</span>
                                         </div>
                                     </div>
-                                    <a href="{{ url('/profile') }}"
-                                        style="background-color: rgb(133, 92, 17); color: white; padding: 5px 10px; border-radius: 5px; text-decoration: none;">
+                                    <a href="{{ url('/profile') }}" class="rounded-lg !text-[#ffffff] hover:!text-[#666666] bg-orange-800">
                                         {{ __('site.user_profile') }}
                                     </a>
                                 </li>
 
                                 {{--<!-- Menu Footer-->--}}
                                 <li class="user-footer">
-                                    <a href="{{ route('logout') }}" class="btn btn-default btn-flat"
+                                    <a href="{{ route('logout') }}" class="btn btn-default btn-flat !rounded-lg"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('site.logout') }}
                                     </a>
