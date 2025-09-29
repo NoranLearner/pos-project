@@ -90,8 +90,8 @@
     <link rel="stylesheet" href="{{ asset('dashboard_files/plugins/icheck/all.css') }}">
 
     {{--html in ie--}}
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    {{-- <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script> --}}
 
     <!-- For Import Tailwind -->
     @if (file_exists(public_path('hot')) && app()->environment('local'))
@@ -252,9 +252,10 @@
                                             <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle w-full h-auto" alt="User Image">
                                         </div>
                                         <div class="w-3/5">
-                                            <h4 class="text-white">{{ Auth::user()->name }}</h4>
-                                            {{-- <span>{{ __('main.user_role') }}</span> --}}
-                                            <span class="text-orange">Member since 2days</span>
+                                            <h4 class="text-white !my-3">{{ Auth::user()->name }}</h4>
+                                            {{-- <span class="text-orange">Member since 2days</span> --}}
+                                            {{-- <span class="text-orange">{{ __('site.user_role') }}<br/>{{ Auth::user()->roles()->first()->display_name }}</span> --}}
+                                            <span class="text-orange">"{{ Auth::user()->roles()->first()->display_name }}"</span>
                                         </div>
                                     </div>
                                     <a href="{{ url('/profile') }}" class="bg-orange-800 rounded-lg !text-[#ffffff] hover:!text-[#666666] ">
