@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,10 +19,21 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('dashboard')->name('dashboard.')->group(function () {
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    ],
+    function () {
 
-    Route::get('/index', [DashboardController::class, 'index'])->name('index');
+        Route::prefix('dashboard')->name('dashboard.')->group(function () {
 
-}); // end of dashboard routes
+            Route::get('/index', [DashboardController::class, 'index'])->name('index');
+
+        }); // end of dashboard routes
+
+    }
+);
+
 
 require __DIR__ . '/auth.php';

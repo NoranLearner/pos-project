@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-{{-- dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}" --}}
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
 
 <head>
     <meta charset="utf-8">
@@ -183,22 +182,35 @@
                             </ul>
                         </li>
 
-                        {{--<!-- Tasks: style can be found in dropdown.less -->--}}
+                        {{-- Change Language in website --}}
                         <li class="dropdown tasks-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag-o"></i></a>
-                            <ul class="dropdown-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                @php
+                                    $currentLocale = app()->getLocale();
+                                    $flag = $currentLocale === 'ar' ? 'ar_flag.png' : 'us_flag.png';
+                                    $langName = $currentLocale === 'ar' ? 'العربية' : 'English';
+                                @endphp
+                                <img src="{{URL::asset('dashboard_files/img/flags/'. $flag)}}" class="w-9 h-auto" alt="img">
+                                {{-- <strong class="mr-2 ml-2 my-auto">{{ $langName }}</strong> --}}
+                            </a>
+                            <ul class="dropdown-menu !size-auto">
                                 <li>
-                                    {{--<!-- inner menu: contains the actual data -->--}}
                                     <ul class="menu">
-                                        {{-- @foreach(LaravelLocalization::getSupportedLocales() as $localeCode =>
-                                        $properties)
-                                        <li>
-                                            <a rel="alternate" hreflang="{{ $localeCode }}"
-                                                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                                {{ $properties['native'] }}
-                                            </a>
-                                        </li>
-                                        @endforeach --}}
+                                        @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                            <li>
+                                                <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                    <div class="flex justify-start items-center">
+                                                        <span class="mx-6">
+                                                            @php
+                                                                $flag = $localeCode === 'ar' ? 'ar_flag.png' : 'us_flag.png';
+                                                            @endphp
+                                                            <img src="{{URL::asset('dashboard_files/img/flags/' . $flag)}}" alt="img" class="w-12 h-auto">
+                                                        </span>
+                                                        <strong>{{ $properties['native'] }}</strong>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </li>
                             </ul>
