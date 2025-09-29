@@ -94,8 +94,27 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
     <!-- For Import Tailwind -->
+    @if (file_exists(public_path('hot')) && app()->environment('local'))
+        {{-- Vite dev server --}}
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @elseif (file_exists(public_path('build/manifest.json')))
+        {{-- Vite production build --}}
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @endif
+    {{-- Tailwind CDN fallback (always loaded just in case) --}}
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E3A8A',
+                        secondary: '#F97316',
+                    }
+                }
+            }
+        }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
 
@@ -238,7 +257,7 @@
                                             <span class="text-orange">Member since 2days</span>
                                         </div>
                                     </div>
-                                    <a href="{{ url('/profile') }}" class="rounded-lg !text-[#ffffff] hover:!text-[#666666] bg-orange-800">
+                                    <a href="{{ url('/profile') }}" class="bg-orange-800 rounded-lg !text-[#ffffff] hover:!text-[#666666] ">
                                         {{ __('site.user_profile') }}
                                     </a>
                                 </li>
