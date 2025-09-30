@@ -15,6 +15,8 @@ return [
         'super_admin' => [
             'users' => 'c,r,u,d',
         ],
+        'admin' => [],
+        'user' => [],
         // 'superadministrator' => [
         //     'users' => 'c,r,u,d',
         //     'payments' => 'c,r,u,d',

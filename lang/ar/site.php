@@ -11,15 +11,21 @@ return [
     // General
     'no_data_found' => 'لم يتم العثور على بيانات',
     'action' => 'الاجراء',
+    'create' => 'اضافة',
     'add' => 'اضافة',
     'edit' => 'تعديل',
     'update' => 'تحديث',
     'delete' => 'حذف',
+    'read' => 'عرض',
     'view' => 'عرض',
     'save' => 'حفظ',
     'cancel' => 'إلغاء',
     'search' => 'بحث',
     'requirements' => 'تأكد من استيفاء هذه المتطلبات',
+    'added_successfully' => 'تمت الإضافة بنجاح',
+    'updated_successfully' => 'تم التحديث بنجاح',
+    'delete_successfully' => 'تم الحذف بنجاح',
+    'permissions' => 'الصلاحيات',
 
     // Users
     'users' => 'المشرفين',
@@ -34,6 +40,7 @@ return [
     'role' => 'الدور',
     'user_role' => 'دور المستخدم',
     'select_role' => 'اختر الدور',
+
 
     // 'status' => 'الحالة',
     // 'active' => 'نشط',

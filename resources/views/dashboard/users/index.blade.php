@@ -56,10 +56,17 @@
 
                 <div class="box-header">
                     {{-- Add User Button --}}
-                    <a href="{{ route('dashboard.users.create') }}"
-                        class="btn m-4 bg-green-500 hover:bg-green-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-green-300">
-                        <i class="fa fa-plus"></i> @lang('site.user_add')
-                    </a>
+                    @if (auth()->user()->hasPermission('users_create'))
+                        <a href="{{ route('dashboard.users.create') }}"
+                            class="btn m-4 bg-green-500 hover:bg-green-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-green-300">
+                            <i class="fa fa-plus"></i> @lang('site.user_add')
+                        </a>
+                    @else
+                        <a href="#"
+                            class="btn m-4 bg-green-500 opacity-50 cursor-not-allowed text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-green-300">
+                            <i class="fa fa-plus"></i> @lang('site.user_add')
+                        </a>
+                    @endif
                 </div>
 
                 <div class="box-body">
@@ -121,24 +128,48 @@
                                             </td>
                                             <td class="px-6 py-4">
                                                 <div class="flex items-center">
-                                                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Online
-                                                    {{-- <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Offline --}}
+                                                    @if ($user->hasRole(['super_admin', 'admin', 'user']))
+                                                        @foreach ($user->roles as $role)
+                                                            @if ($role->name == 'super_admin')
+                                                                {{-- <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> --}}
+                                                                <span class="font-medium text-green-500">{{ $role->display_name }}</span>
+                                                            @elseif($role->name == 'admin')
+                                                                <span class="font-medium text-yellow-700">{{ $role->display_name }}</span>
+                                                            @else
+                                                                <span class="font-medium text-cyan-500">{{ $role->display_name }}</span>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4">
-                                                <a href="{{ route('dashboard.users.edit', $user->id) }}"
-                                                    class="btn bg-blue-500 hover:bg-blue-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-300">
-                                                    <i class="fa fa-edit"></i> @lang('site.edit')
-                                                </a>
-                                                <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="post"
-                                                    class="inline-block">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit"
-                                                        class="btn btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
+                                                {{-- For Edit --}}
+                                                @if (auth()->user()->hasPermission('users_update'))
+                                                    <a href="{{ route('dashboard.users.edit', $user->id) }}"
+                                                        class="btn bg-blue-500 hover:bg-blue-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-300">
+                                                        <i class="fa fa-edit"></i> @lang('site.edit')
+                                                    </a>
+                                                @else
+                                                    <a href="#" class="btn bg-blue-500 opacity-50 cursor-not-allowed text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-300">
+                                                        <i class="fa fa-edit"></i> @lang('site.edit')
+                                                    </a>
+                                                @endif
+                                                {{-- For Delete --}}
+                                                @if (auth()->user()->hasPermission('users_delete'))
+                                                    <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="post"
+                                                        class="inline-block">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit"
+                                                            class="btn btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
+                                                            <i class="fa fa-trash"></i> @lang('site.delete')
+                                                        </button>
+                                                    </form>
+                                                @else
+                                                    <button class="btn btn-danger opacity-50 cursor-not-allowed hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
                                                         <i class="fa fa-trash"></i> @lang('site.delete')
                                                     </button>
-                                                </form>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

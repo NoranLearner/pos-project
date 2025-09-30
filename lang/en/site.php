@@ -11,15 +11,21 @@ return [
     // General
     'no_data_found' => 'No data found',
     'action' => 'Action',
+    'create' => 'Create',
     'add' => 'Add',
     'edit' => 'Edit',
     'update' => 'Update',
     'delete' => 'Delete',
+    'read' => 'Read',
     'view' => 'View',
     'save' => 'Save',
     'cancel' => 'Cancel',
     'search' => 'Search',
     'requirements' => 'Ensure that these requirements are met',
+    'added_successfully' => 'Added Successfully',
+    'updated_successfully' => 'Updated Successfully',
+    'delete_successfully' => 'Deleted Successfully',
+    'permissions' => 'Permissions',
 
     // Users
     'users' => 'Users',
@@ -34,6 +40,7 @@ return [
     'role' => 'Role',
     'user_role' => 'User Role',
     'select_role' => 'Select Role',
+
 
     // 'status' => 'Status',
     // 'active' => 'Active',

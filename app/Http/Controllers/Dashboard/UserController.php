@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -22,7 +25,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('dashboard.users.create');
+        $roles = Role::all();
+        return view('dashboard.users.create', compact('roles'));
     }
 
     /**
@@ -30,7 +34,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // @dd($request->all());
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|min:2|max:30',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|confirmed|min:6',
+            'role' => 'required|' . Rule::in(['user', 'admin', 'super_admin']),
+            'permissions' => 'nullable|array',
+            'permissions.*' => 'string'
+        ]);
+
+        $newUser = User::create($request->all());
+
+        $newUser->addRole($request->role);
+
+        if (!empty($validatedData['permissions'])) {
+            $newUser->syncPermissions($validatedData['permissions']);
+        }
+
+        Alert::toast(__('site.added_successfully'), 'success')->timerProgressBar();
+
+        return redirect()->route('dashboard.users.index');
     }
 
     /**
