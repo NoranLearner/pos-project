@@ -18,10 +18,11 @@ return [
     'view' => 'عرض',
     'save' => 'حفظ',
     'cancel' => 'إلغاء',
+    'search' => 'بحث',
+    'requirements' => 'تأكد من استيفاء هذه المتطلبات',
 
     // Users
     'users' => 'المشرفين',
-    'user_role' => 'دور المستخدم',
     'user_add' => 'اضافة مشرف',
     'user_edit' => 'تعديل مشرف',
     'user_delete' => 'حذف مشرف',
@@ -31,12 +32,12 @@ return [
     'confirm_password' => 'تأكيد كلمة المرور',
     'image' => 'الصورة',
     'role' => 'الدور',
+    'user_role' => 'دور المستخدم',
     'select_role' => 'اختر الدور',
 
     // 'status' => 'الحالة',
     // 'active' => 'نشط',
     // 'inactive' => 'غير نشط',
-    // 'search' => 'بحث',
     // 'reset' => 'إعادة تعيين',
     // 'are_you_sure' => 'هل أنت متأكد؟',
     // 'yes' => 'نعم',

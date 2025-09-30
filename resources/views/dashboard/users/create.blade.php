@@ -30,7 +30,7 @@
 
                 <div class="box-body">
 
-                    {{-- @include('partials._errors') --}}
+                    @include('partials._errors')
 
                     {{-- https://flowbite.com/docs/components/forms/ --}}
 

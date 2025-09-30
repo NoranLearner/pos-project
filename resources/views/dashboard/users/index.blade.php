@@ -9,7 +9,8 @@
         <section class="content-header">
 
             <ol class="breadcrumb !static !float-left rtl:!float-right !text-xl">
-                <li class="active"><a href="{{ route('dashboard.users.index') }}"><i class="fa fa-users"></i> @lang('site.users')</a></li>
+                <li class="active"><a href="{{ route('dashboard.users.index') }}"><i class="fa fa-users"></i>
+                        @lang('site.users')</a></li>
             </ol>
 
             <div class="clearfix"></div>
@@ -24,22 +25,27 @@
 
                 {{-- <div class="box-header with-border">
 
-                    <h3 class="box-title" style="margin-bottom: 15px">@lang('site.users') <small>{{ $users->total() }}</small></h3>
+                    <h3 class="box-title" style="margin-bottom: 15px">@lang('site.users') <small>{{ $users->total()
+                            }}</small></h3>
 
                     <form action="{{ route('dashboard.users.index') }}" method="get">
 
                         <div class="row">
 
                             <div class="col-md-4">
-                                <input type="text" name="search" class="form-control" placeholder="@lang('site.search')" value="{{ request()->search }}">
+                                <input type="text" name="search" class="form-control" placeholder="@lang('site.search')"
+                                    value="{{ request()->search }}">
                             </div>
 
                             <div class="col-md-4">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>
+                                    @lang('site.search')</button>
                                 @if (auth()->user()->hasPermission('create_users'))
-                                    <a href="{{ route('dashboard.users.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</a>
+                                <a href="{{ route('dashboard.users.create') }}" class="btn btn-primary"><i
+                                        class="fa fa-plus"></i> @lang('site.add')</a>
                                 @else
-                                    <a href="#" class="btn btn-primary disabled"><i class="fa fa-plus"></i> @lang('site.add')</a>
+                                <a href="#" class="btn btn-primary disabled"><i class="fa fa-plus"></i>
+                                    @lang('site.add')</a>
                                 @endif
                             </div>
 
@@ -47,6 +53,14 @@
                     </form>
 
                 </div> --}}
+
+                <div class="box-header">
+                    {{-- Add User Button --}}
+                    <a href="{{ route('dashboard.users.create') }}"
+                        class="btn m-4 bg-green-500 hover:bg-green-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-green-300">
+                        <i class="fa fa-plus"></i> @lang('site.user_add')
+                    </a>
+                </div>
 
                 <div class="box-body">
 
@@ -95,7 +109,8 @@
                                             </td>
                                             {{-- For User Name And Image --}}
                                             <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
-                                                <img class="w-12 h-12 rounded-full" src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" alt="user image">
+                                                <img class="w-12 h-12 rounded-full"
+                                                    src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" alt="user image">
                                                 <div class="ps-3">
                                                     <div class="text-xl font-medium">{{ $user->name }}</div>
                                                 </div>
@@ -111,15 +126,18 @@
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4">
-                                                <a href="{{ route('dashboard.users.edit', $user->id) }}" class="btn bg-blue-500 hover:bg-blue-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-300">
+                                                <a href="{{ route('dashboard.users.edit', $user->id) }}"
+                                                    class="btn bg-blue-500 hover:bg-blue-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-300">
                                                     <i class="fa fa-edit"></i> @lang('site.edit')
                                                 </a>
-                                                <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="post" class="inline-block">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit" class="btn btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
-                                                            <i class="fa fa-trash"></i> @lang('site.delete')
-                                                        </button>
+                                                <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="post"
+                                                    class="inline-block">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit"
+                                                        class="btn btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
+                                                        <i class="fa fa-trash"></i> @lang('site.delete')
+                                                    </button>
                                                 </form>
                                             </td>
                                         </tr>

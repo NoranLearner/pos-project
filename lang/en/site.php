@@ -18,10 +18,11 @@ return [
     'view' => 'View',
     'save' => 'Save',
     'cancel' => 'Cancel',
+    'search' => 'Search',
+    'requirements' => 'Ensure that these requirements are met',
 
     // Users
     'users' => 'Users',
-    'user_role' => 'User Role',
     'user_add' => 'Add User',
     'user_edit' => 'Edit User',
     'user_delete' => 'Delete User',
@@ -31,12 +32,12 @@ return [
     'confirm_password' => 'Confirm Password',
     'image' => 'Image',
     'role' => 'Role',
+    'user_role' => 'User Role',
     'select_role' => 'Select Role',
 
     // 'status' => 'Status',
     // 'active' => 'Active',
     // 'inactive' => 'Inactive',
-    // 'search' => 'Search',
     // 'reset' => 'Reset',
     // 'are_you_sure' => 'Are you sure?',
     // 'yes' => 'Yes',
