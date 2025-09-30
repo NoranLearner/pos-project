@@ -2,10 +2,48 @@
 
 return [
 
+    // Dashboard
     'user_profile' => 'User Profile',
     'edit_profile' => 'Edit Profile',
     'logout' => 'Logout',
     'dashboard' => 'Dashboard',
+
+    // General
+    'no_data_found' => 'No data found',
+    'action' => 'Action',
+    'add' => 'Add',
+    'edit' => 'Edit',
+    'update' => 'Update',
+    'delete' => 'Delete',
+    'view' => 'View',
+    'save' => 'Save',
+    'cancel' => 'Cancel',
+
+    // Users
+    'users' => 'Users',
     'user_role' => 'User Role',
+    'user_add' => 'Add User',
+    'user_edit' => 'Edit User',
+    'user_delete' => 'Delete User',
+    'name' => 'Name',
+    'email' => 'Email',
+    'password' => 'Password',
+    'confirm_password' => 'Confirm Password',
+    'image' => 'Image',
+    'role' => 'Role',
+    'select_role' => 'Select Role',
+
+    // 'status' => 'Status',
+    // 'active' => 'Active',
+    // 'inactive' => 'Inactive',
+    // 'search' => 'Search',
+    // 'reset' => 'Reset',
+    // 'are_you_sure' => 'Are you sure?',
+    // 'yes' => 'Yes',
+    // 'no' => 'No',
+    // 'created_at' => 'Created At',
+    // 'updated_at' => 'Updated At',
+    // 'created_by' => 'Created By',
+    // 'updated_by' => 'Updated By',
 
 ];

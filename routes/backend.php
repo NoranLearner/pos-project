@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\UserController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::get('/', function () {
@@ -29,6 +30,8 @@ Route::group(
         Route::prefix('dashboard')->name('dashboard.')->group(function () {
 
             Route::get('/index', [DashboardController::class, 'index'])->name('index');
+
+            Route::resource('/users', UserController::class)->names('users');
 
         }); // end of dashboard routes
 

@@ -14,11 +14,34 @@
 
         <ul class="sidebar-menu" data-widget="tree">
 
+            {{-- For Dashboard --}}
             <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i><span>@lang('site.dashboard')</span></a></li>
 
-            {{--
+            {{-- For Users --}}
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    <span>@lang('site.users')</span>
+                    <ul class="treeview-menu">
+                        {{-- Users --}}
+                        <li>
+                            <a href="{{ route('dashboard.users.index') }}">
+                                <i class="fa fa-users"></i>
+                                <span>@lang('site.users')</span>
+                            </a>
+                        </li>
+                        {{-- Add User --}}
+                        <li>
+                            <a href="{{ route('dashboard.users.create') }}">
+                                <i class="fa fa-user-plus"></i>
+                                <span>@lang('site.user_add')</span>
+                            </a>
+                        </li>
+                    </ul>
+                </a>
+            </li>
 
-            @if (auth()->user()->hasPermission('read_categories'))
+            {{-- @if (auth()->user()->hasPermission('read_categories'))
                 <li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-th"></i><span>@lang('site.categories')</span></a></li>
             @endif
 
