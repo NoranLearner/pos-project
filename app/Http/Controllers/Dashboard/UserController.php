@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -17,7 +18,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['permission:users'])->only('index');
+        $this->middleware(['permission:users_read'])->only('index');
         $this->middleware(['permission:users_create'])->only('create');
         $this->middleware(['permission:users_update'])->only('edit');
         $this->middleware(['permission:users_delete'])->only('destroy');
@@ -26,10 +27,32 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         // $users = User::all();
-        $users = User::orderBy('created_at', 'desc')->paginate(8);
+        // $users = User::orderBy('created_at', 'desc')->paginate(8);
+        $user = Auth::user();
+
+        if ($user->hasRole('super_admin')) {
+
+            $users = User::whereHasRole(['user', 'admin', 'super_admin'])->where(function ($q) use ($request) {
+                    return $q->when($request->search, function ($query) use ($request) {
+                        return $query->where('name', 'like', '%' . $request->search . '%')
+                            ->orWhere('email', 'like', '%' . $request->search . '%');
+                    });
+            })->orderBy('created_at', 'desc')->paginate(8);
+
+        } else {
+
+            $users = User::whereHasRole(['user', 'admin'])->where(function ($q) use ($request) {
+                    return $q->when($request->search, function ($query) use ($request) {
+                        return $query->where('name', 'like', '%' . $request->search . '%')
+                            ->orWhere('email', 'like', '%' . $request->search . '%');
+                    });
+            })->orderBy('created_at', 'desc')->paginate(8);
+
+        }
+
         return view('dashboard.users.index', compact('users'));
     }
 
