@@ -188,7 +188,7 @@
                                                     @endif
                                                     {{-- For Delete --}}
                                                     @if (auth()->user()->hasPermission('users_delete'))
-                                                        <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="post"
+                                                        {{-- <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="post"
                                                             class="inline-block">
                                                             @csrf
                                                             @method('delete')
@@ -196,7 +196,13 @@
                                                                 class="btn btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
                                                                 <i class="fa fa-trash"></i> @lang('site.delete')
                                                             </button>
-                                                        </form>
+                                                        </form> --}}
+                                                        {{-- Using Modal --}}
+                                                        <button type="button" class="btn btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300"
+                                                            data-toggle="modal" data-target="#deleteModal-{{ $user->id }}">
+                                                            <i class="fa fa-trash"></i> @lang('site.delete')
+                                                        </button>
+                                                        @include('partials.delete_user_modal', ['user' => $user])
                                                     @else
                                                         <button class="btn btn-danger opacity-50 cursor-not-allowed hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
                                                             <i class="fa fa-trash"></i> @lang('site.delete')
@@ -210,10 +216,10 @@
                                 </table>
 
                                 <div class="mr-4">
-                                    {{ $users->links('pagination::bootstrap-4') }}
+                                    {{-- {{ $users->links('pagination::bootstrap-4') }} --}}
                                     {{-- {{ $users->links('vendor.pagination.tailwind') }} --}}
                                     {{-- {{ $users->links('pagination::tailwind') }} --}}
-                                    {{-- {{ $users->appends(request()->query())->links() }} --}}
+                                    {{ $users->appends(request()->query())->links('pagination::bootstrap-4') }}
                                 </div>
 
                             </div>

@@ -165,6 +165,14 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if ($user->image && $user->image->file) {
+            $old_image = $user->image->file;
+            $this->Delete_attachment('upload_image', 'users/'.$old_image, $user->id);
+        }
+        $user->removeRoles();
+        $user->permissions()->detach();
+        $user->delete();
+        Alert::toast(__('site.delete_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.users.index');
     }
 }

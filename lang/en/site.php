@@ -35,6 +35,11 @@ return [
     '500_message' => 'The server encountered an internal error and was unable to complete your request.',
     'back' => 'Back ←',
     'back_home' => 'Home ←',
+    'are_you_sure' => 'Are you sure?',
+    'confirm_delete' => 'Confirm Delete',
+    'delete_warning' => 'Are you sure you want to delete',
+    'yes' => 'Yes',
+    'no' => 'No',
 
     // Users
     'users' => 'Users',
@@ -55,9 +60,6 @@ return [
     // 'active' => 'Active',
     // 'inactive' => 'Inactive',
     // 'reset' => 'Reset',
-    // 'are_you_sure' => 'Are you sure?',
-    // 'yes' => 'Yes',
-    // 'no' => 'No',
     // 'created_at' => 'Created At',
     // 'updated_at' => 'Updated At',
     // 'created_by' => 'Created By',
