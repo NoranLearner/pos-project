@@ -19,7 +19,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        // $users = User::all();
+        $users = User::orderBy('created_at', 'desc')->paginate(5);
         return view('dashboard.users.index', compact('users'));
     }
 

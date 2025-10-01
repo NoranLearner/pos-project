@@ -182,6 +182,13 @@
 
                             </table>
 
+                            <div class="mr-4">
+                                {{ $users->links('pagination::bootstrap-4') }}
+                                {{-- {{ $users->links('vendor.pagination.tailwind') }} --}}
+                                {{-- {{ $users->links('pagination::tailwind') }} --}}
+                                {{-- {{ $users->appends(request()->query())->links() }} --}}
+                            </div>
+
                         </div>
 
                     @else
