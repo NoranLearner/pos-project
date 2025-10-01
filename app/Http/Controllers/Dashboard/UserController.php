@@ -15,6 +15,14 @@ class UserController extends Controller
 {
     use UploadTrait;
 
+    public function __construct()
+    {
+        $this->middleware(['permission:users'])->only('index');
+        $this->middleware(['permission:users_create'])->only('create');
+        $this->middleware(['permission:users_update'])->only('edit');
+        $this->middleware(['permission:users_delete'])->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */

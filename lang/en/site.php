@@ -27,6 +27,14 @@ return [
     'delete_successfully' => 'Deleted Successfully',
     'permissions' => 'Permissions',
     'invalid_image' => 'Invalid Image!',
+    '403_title' => 'Access Denied',
+    '403_message' => 'Sorry, you don’t have permission to access this page.',
+    '404_title' => 'Page Not Found',
+    '404_message' => 'The page you are looking for does not exist or has been removed.',
+    '500_title' => 'Internal Server Error',
+    '500_message' => 'The server encountered an internal error and was unable to complete your request.',
+    'back' => 'Back ←',
+    'back_home' => 'Home ←',
 
     // Users
     'users' => 'Users',
