@@ -157,8 +157,13 @@
                                         <li><!-- start message -->
                                             <a href="#">
                                                 <div class="pull-left">
-                                                    <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}"
-                                                        class="img-circle" alt="User Image">
+                                                    @if (auth()->user()->image)
+                                                        <img class="w-12 h-12 rounded-full"
+                                                            src="{{ asset('dashboard/imgs/users/' . auth()->user()->image->file) }}" class="img-circle" alt="user image">
+                                                    @else
+                                                        <img class="w-12 h-12 rounded-full"
+                                                            src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle" alt="user image">
+                                                    @endif
                                                 </div>
                                                 <h4>
                                                     Support Team
@@ -239,8 +244,11 @@
                         <li class="dropdown user user-menu">
 
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="user-image"
-                                    alt="User Image">
+                                @if (auth()->user()->image)
+                                    <img src="{{ asset('dashboard/imgs/users/' . auth()->user()->image->file) }}" class="user-image" alt="user image">
+                                @else
+                                    <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="user-image" alt="user image">
+                                @endif
                                 {{-- <span class="hidden-xs">{{ Auth::user()->name }}</span> --}}
                             </a>
                             <ul class="dropdown-menu">
@@ -249,7 +257,11 @@
                                 <li class="user-header">
                                     <div class="flex items-center my-4">
                                         <div class="w-2/5 mx-4">
-                                            <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle w-full h-auto" alt="User Image">
+                                            @if (auth()->user()->image)
+                                                <img src="{{ asset('dashboard/imgs/users/' . auth()->user()->image->file) }}" class="img-circle w-full h-auto" alt="user image">
+                                            @else
+                                                <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle w-full h-auto" alt="user image">
+                                            @endif
                                         </div>
                                         <div class="w-3/5">
                                             <h4 class="text-white !my-3">{{ Auth::user()->name }}</h4>

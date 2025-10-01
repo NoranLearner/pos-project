@@ -4,7 +4,11 @@
 
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                @if (auth()->user()->image)
+                    <img src="{{ asset('dashboard/imgs/users/' . auth()->user()->image->file) }}" class="img-circle" alt="user image">
+                @else
+                    <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle" alt="user image">
+                @endif
             </div>
             <div class="pull-left info">
                 <p>{{ Auth::user()->name }}</p>
