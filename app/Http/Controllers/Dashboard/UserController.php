@@ -9,6 +9,7 @@ use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -20,7 +21,7 @@ class UserController extends Controller
     public function index()
     {
         // $users = User::all();
-        $users = User::orderBy('created_at', 'desc')->paginate(5);
+        $users = User::orderBy('created_at', 'desc')->paginate(8);
         return view('dashboard.users.index', compact('users'));
     }
 
@@ -50,13 +51,11 @@ class UserController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $newUser = User::create($request->all());
+        $newUser = User::create($validatedData);
 
         $newUser->addRole($request->role);
 
-        if (!empty($validatedData['permissions'])) {
-            $newUser->syncPermissions($validatedData['permissions']);
-        }
+        $newUser->syncPermissions($validatedData['permissions'] ?? []);
 
         if ($request->hasFile('image')) {
             $this->verifyAndStoreImage($request, 'image', 'users', 'upload_image', $newUser->id, User::class);
@@ -80,7 +79,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $rolesList = Role::all();
+        // $roles = $user->roles()->pluck('name');
+        // $permissions = $user->allPermissions()->pluck('name')->toArray();
+        // return view('dashboard.users.edit', compact(['user', 'rolesList', 'roles', 'permissions']));
+        return view('dashboard.users.edit', compact(['user', 'rolesList']));
     }
 
     /**
@@ -88,7 +91,42 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|min:2|max:30',
+            'email' => 'required|email|' . Rule::unique('users')->ignore($user->id),
+            'password' => 'nullable|min:6',
+            'role' => 'required|' . Rule::in(['user', 'admin', 'super_admin']),
+            'permissions' => 'nullable|array',
+            'permissions.*' => 'string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $requestData = $request->except(['password', '_token', 'role', 'permissions']);
+
+        if ($request->filled('password')) {
+            $requestData['password'] = Hash::make($request->password);
+        }
+
+        $user->update($requestData);
+
+        $user->syncRoles([$request->input('role')]);
+
+        $user->syncPermissions($request->input('permissions', []));
+
+        if ($request->hasFile('image')) {
+            // Delete old image
+            if ($user->image) {
+                $old_image = $user->image->file;
+                $this->Delete_attachment('upload_image', 'users/'.$old_image, $user->id);
+            }
+            // Store new image
+            $this->verifyAndStoreImage($request, 'image', 'users', 'upload_image', $user->id, User::class);
+        }
+
+        Alert::toast(__('site.updated_successfully'), 'success')->timerProgressBar();
+
+        return redirect()->route('dashboard.users.index');
+
     }
 
     /**

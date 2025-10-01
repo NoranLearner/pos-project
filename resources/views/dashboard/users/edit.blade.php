@@ -1,6 +1,6 @@
 @extends('layouts.dashboard.app')
 
-@section('title', 'Add User')
+@section('title', 'Edit User')
 
 @section('content')
 
@@ -9,14 +9,14 @@
         <section class="content-header">
 
             <ol class="breadcrumb !static !float-left rtl:!float-right !text-xl">
-                <li><a href="{{ route('dashboard.users.index') }}"><i class="fa fa-user-plus"></i> @lang('site.users')</a>
+                <li><a href="{{ route('dashboard.users.index') }}"> <i class="fa fa-user"></i> @lang('site.users')</a>
                 </li>
-                <li class="active">@lang('site.user_add')</li>
+                <li class="active">@lang('site.user_edit')</li>
             </ol>
 
             <div class="clearfix"></div>
 
-            <h1 class="!my-5">@lang('site.user_add')</h1>
+            <h1 class="!my-5">@lang('site.user_edit')</h1>
 
         </section>
 
@@ -24,18 +24,13 @@
 
             <div class="box box-primary">
 
-                {{-- <div class="box-header">
-                    <h3 class="box-title">@lang('site.add')</h3>
-                </div> --}}
-
                 <div class="box-body">
 
                     @include('partials._errors')
 
-                    {{-- https://flowbite.com/docs/components/forms/ --}}
-
-                    <form action="{{ route('dashboard.users.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('dashboard.users.update', $user->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
+                        @method('put')
 
                         {{-- Image --}}
                         <div class="mb-5">
@@ -43,23 +38,28 @@
                                 class="block mb-4 text-xl font-medium text-gray-900">@lang('site.image')</label>
                             <input type="file" id="image" name="image"
                                 class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-lg  rounded-lg focus:outline-none cursor-pointer w-auto p-2.5"
-                                required value="" onchange="showPreview(event)">
+                                value="" onchange="showPreview(event)">
                             @error('image')
                                 <span class="text-red-500 text-lg">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group mb-5">
-                            <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" style="width: 100px"
-                                class="img-thumbnail image-preview" id="image-prv" alt="user image">
+                            @if (!$user->image)
+                                <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" style="width: 100px" class="img-thumbnail image-preview"
+                                id="image-prv" alt="user image">
+                            @else
+                                <img src="{{ asset('dashboard/imgs/users/' . $user->image->file) }}" style="width: 100px" class="img-thumbnail image-preview"
+                                id="image-prv" alt="user image">
+                            @endif
                         </div>
 
                         {{-- Name --}}
                         <div class="mb-5">
                             <label for="name"
                                 class="block mb-4 text-xl font-medium text-gray-900">@lang('site.name')</label>
-                            <input type="text" id="name" name="name" value="{{ old('name') }}"
-                                class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                placeholder="@lang('site.name')" required />
+                            <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}"
+                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                required>
                             @error('name')
                                 <span class="text-red-500 text-lg">{{ $message }}</span>
                             @enderror
@@ -69,9 +69,9 @@
                         <div class="mb-5">
                             <label for="email"
                                 class="block mb-4 text-xl font-medium text-gray-900">@lang('site.email')</label>
-                            <input type="email" id="email" name="email" value="{{ old('email') }}"
-                                class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                placeholder="@lang('site.email')" required />
+                            <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}"
+                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                required>
                             @error('email')
                                 <span class="text-red-500 text-lg">{{ $message }}</span>
                             @enderror
@@ -82,45 +82,41 @@
                             <label for="password"
                                 class="block mb-4 text-xl font-medium text-gray-900">@lang('site.password')</label>
                             <input type="password" id="password" name="password"
-                                class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                required />
+                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             @error('password')
                                 <span class="text-red-500 text-lg">{{ $message }}</span>
                             @enderror
                         </div>
 
-                        {{-- Confirm Password --}}
-                        <div class="mb-5">
-                            <label for="repeat-password"
+                        {{-- Password Confirmation --}}
+                        {{-- <div class="mb-5">
+                            <label for="password_confirmation"
                                 class="block mb-4 text-xl font-medium text-gray-900">@lang('site.confirm_password')</label>
-                            <input type="password" id="repeat-password" name="password_confirmation"
-                                class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                required />
+                            <input type="password" id="password_confirmation" name="password_confirmation"
+                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             @error('password_confirmation')
+                                <span class="text-red-500 text-lg">{{ $message }}</span>
+                            @enderror
+                        </div> --}}
+
+                        {{-- Role --}}
+                        <div class="mb-5">
+                            <label for="role"
+                                class="block mb-4 text-xl font-medium text-gray-900">@lang('site.role')</label>
+                            <select name="role" id="role"
+                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                @foreach ($rolesList as $role)
+                                    {{-- {{ $roles->contains($role->name) ? 'selected' : '' }} --}}
+                                    <option value="{{ $role->name }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>
+                                        {{ $role->display_name }}</option>
+                                @endforeach
+                            </select>
+                            @error('role')
                                 <span class="text-red-500 text-lg">{{ $message }}</span>
                             @enderror
                         </div>
 
-                        {{-- Role --}}
-                        <div class="mb-5">
-                            <label for="role" class="block mb-4 text-xl font-medium text-gray-900"> @lang('site.role')
-                            </label>
-                            <select id="role" name="role"
-                                class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                <option value="">@lang('site.select_role')</option>
-                                {{-- <option value="super_admin">Super Admin</option>
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option> --}}
-                                @foreach ($roles as $role)
-                                    <option value="{{ $role->name }}" @selected($role->name == old('role'))>{{$role->display_name }}</option>
-                                @endforeach
-                            </select>
-                            @error('role')
-                            <span class="text-red-500 text-lg">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        {{-- Permission Tabs --}}
+                        {{-- Permissions Tabs --}}
                         <div class="mb-5">
 
                             <label class="block mb-4 text-xl font-medium text-gray-900">@lang('site.permissions')</label>
@@ -147,7 +143,8 @@
                                         <div class="tab-pane {{ $index == 0 ? 'active' : '' }}" id="{{ $model }}">
                                             @foreach ($maps as $map)
                                                 <label class="ms-4 font-medium text-gray-900">
-                                                    <input type="checkbox" name="permissions[]" value="{{ $model . '_' . $map }}">
+                                                    {{--  {{ in_array($model . '_' . $map, $permissions) ? 'checked' : '' }} --}}
+                                                    <input type="checkbox" name="permissions[]" value="{{ $model . '_' . $map }}" {{ $user->hasPermission($model . '_' . $map)  ? 'checked' : '' }}>
                                                     @lang('site.' . $map)
                                                 </label>
                                             @endforeach
@@ -165,36 +162,18 @@
                         {{-- End Permission Tabs --}}
 
                         <button type="submit"
-                            class="bg-green-500 hover:bg-green-600 text-white !font-medium rounded-lg py-2 px-4 focus:ring-2 focus:outline-none focus:ring-green-300">
-                            <i class="fa fa-plus ml-2"></i> @lang('site.add')
+                            class="bg-blue-500 hover:bg-blue-600 text-white !font-medium rounded-lg py-2 px-4 focus:ring-2 focus:outline-none focus:ring-blue-300">
+                            <i class="fa fa-edit ml-2"></i> @lang('site.update')
                         </button>
 
                     </form>
 
-                </div><!-- end of box body -->
+                </div>
 
-            </div><!-- end of box -->
+            </div>
 
         </section>
 
     </div>
 
 @endsection
-
-@push('scripts')
-    <script>
-        document.getElementById("image").value = '';
-    </script>
-    {{-- public/dashboard_files/js/custom/image_preview.js --}}
-    {{--
-    <script>
-        document.getElementById("image").value = '';
-        function showPreview(event) {
-            if (event.target.files.length > 0) {
-                let src = URL.createObjectURL(event.target.files[0]);
-                let pv = document.getElementById('image-prv');
-                pv.src = src;
-            }
-        }
-    </script> --}}
-@endpush
