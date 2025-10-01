@@ -26,6 +26,7 @@ return [
     'updated_successfully' => 'تم التحديث بنجاح',
     'delete_successfully' => 'تم الحذف بنجاح',
     'permissions' => 'الصلاحيات',
+    'invalid_image' => 'صورة غير صالحة!',
 
     // Users
     'users' => 'المشرفين',

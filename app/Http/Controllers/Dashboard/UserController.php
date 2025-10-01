@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
+use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
+    use UploadTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -42,7 +45,8 @@ class UserController extends Controller
             'password' => 'required|confirmed|min:6',
             'role' => 'required|' . Rule::in(['user', 'admin', 'super_admin']),
             'permissions' => 'nullable|array',
-            'permissions.*' => 'string'
+            'permissions.*' => 'string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $newUser = User::create($request->all());
@@ -51,6 +55,10 @@ class UserController extends Controller
 
         if (!empty($validatedData['permissions'])) {
             $newUser->syncPermissions($validatedData['permissions']);
+        }
+
+        if ($request->hasFile('image')) {
+            $this->verifyAndStoreImage($request, 'image', 'users', 'upload_image', $newUser->id, User::class);
         }
 
         Alert::toast(__('site.added_successfully'), 'success')->timerProgressBar();

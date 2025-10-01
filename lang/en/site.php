@@ -26,6 +26,7 @@ return [
     'updated_successfully' => 'Updated Successfully',
     'delete_successfully' => 'Deleted Successfully',
     'permissions' => 'Permissions',
+    'invalid_image' => 'Invalid Image!',
 
     // Users
     'users' => 'Users',

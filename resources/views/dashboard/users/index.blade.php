@@ -116,8 +116,13 @@
                                             </td>
                                             {{-- For User Name And Image --}}
                                             <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
-                                                <img class="w-12 h-12 rounded-full"
-                                                    src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" alt="user image">
+                                                @if ($user->image)
+                                                    <img class="w-12 h-12 rounded-full"
+                                                        src="{{ asset('dashboard/imgs/users/' . $user->image->file) }}" alt="user image">
+                                                @else
+                                                    <img class="w-12 h-12 rounded-full"
+                                                        src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" alt="user image">
+                                                @endif
                                                 <div class="ps-3">
                                                     <div class="text-xl font-medium">{{ $user->name }}</div>
                                                 </div>
