@@ -40,7 +40,7 @@ class UserController extends Controller
                         return $query->where('name', 'like', '%' . $request->search . '%')
                             ->orWhere('email', 'like', '%' . $request->search . '%');
                     });
-            })->orderBy('created_at', 'desc')->paginate(8);
+            })->latest()->paginate(8);
 
         } else {
 
