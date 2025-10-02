@@ -32,6 +32,7 @@ Route::group(
             Route::get('/index', [DashboardController::class, 'index'])->name('index');
 
             Route::resource('/users', UserController::class)->names('users');
+            Route::delete('users-delete-all', [UserController::class, 'deleteAll'])->name('users.deleteAll');
 
         }); // end of dashboard routes
 

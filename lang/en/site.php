@@ -17,6 +17,7 @@ return [
     'update' => 'Update',
     'delete' => 'Delete',
     'delete_all' => 'Delete All',
+    'delete_all_warning' => 'Are you sure you want to delete all?',
     'read' => 'Read',
     'view' => 'View',
     'save' => 'Save',

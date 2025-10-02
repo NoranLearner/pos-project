@@ -17,6 +17,7 @@ return [
     'update' => 'تحديث',
     'delete' => 'حذف',
     'delete_all' => 'حذف الكل',
+    'delete_all_warning' => 'هل انت متاكد من حذف الكل؟',
     'read' => 'عرض',
     'view' => 'عرض',
     'save' => 'حفظ',

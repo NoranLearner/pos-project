@@ -9,8 +9,11 @@
             <section class="content-header">
 
                 <ol class="breadcrumb !static !float-left rtl:!float-right !text-xl">
-                    <li class="active"><a href="{{ route('dashboard.users.index') }}"><i class="fa fa-users"></i>
-                            @lang('site.users')</a></li>
+                    <li class="active">
+                        <a href="{{ route('dashboard.users.index') }}">
+                            <i class="fa fa-users"></i> @lang('site.users')
+                        </a>
+                    </li>
                 </ol>
 
                 <div class="clearfix"></div>
@@ -63,13 +66,13 @@
                                 {{-- Delete All Button --}}
                                 @if (auth()->user()->hasPermission('users_delete'))
                                     {{-- Using Modal --}}
-                                    <button type="button" class="btn btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300"
-                                        data-toggle="modal" data-target="#deleteAllModal">
+                                    <button type="button" id="deleteAllButton"
+                                        class="btn m-4 btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
                                         <i class="fa fa-trash"></i> @lang('site.delete_all')
                                     </button>
                                     @include('partials.delete_all_user_modal')
                                 @else
-                                    <button class="btn btn-danger opacity-50 cursor-not-allowed hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
+                                    <button class="btn m-4 btn-danger opacity-50 cursor-not-allowed hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
                                         <i class="fa fa-trash"></i> @lang('site.delete_all')
                                     </button>
                                 @endif
@@ -120,15 +123,15 @@
 
                             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-                                <table class="w-full text-xl text-left rtl:text-right text-gray-500">
+                                <table class="w-full text-xl text-left rtl:text-right text-gray-500" id="usersTable">
 
                                     <thead class="text-lg text-gray-700 uppercase bg-gray-50">
                                         <tr>
                                             <th scope="col" class="p-4">
                                                 <div class="flex items-center">
-                                                    <input id="checkbox-all-search" type="checkbox"
+                                                    <input id="select_all" name="select_all" type="checkbox"
                                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
-                                                    <label for="checkbox-all-search" class="sr-only">checkbox</label>
+                                                    <label for="select_all" class="sr-only">checkbox</label>
                                                 </div>
                                             </th>
                                             <th scope="col" class="px-6 py-3">
@@ -152,9 +155,9 @@
                                                 {{-- For Checkbox --}}
                                                 <td class="w-4 p-4">
                                                     <div class="flex items-center">
-                                                        <input id="checkbox-table-search-1" type="checkbox"
+                                                        <input id="delete_select-{{ $user->id }}" class="delete_select" name="delete_select" type="checkbox" value="{{ $user->id }}"
                                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
-                                                        <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                                                        <label for="delete_select-{{ $user->id }}" class="sr-only">checkbox</label>
                                                     </div>
                                                 </td>
                                                 {{-- For User Name And Image --}}
@@ -253,3 +256,39 @@
         </div>
 
 @endsection
+
+@push('scripts')
+    <script>
+        $(function(){
+            $('#select_all').click(function(){
+                if(this.checked){
+                    $('.delete_select').each(function(){
+                        this.checked = true;
+                    })
+                }else{
+                    $('.delete_select').each(function(){
+                        this.checked = false;
+                    })
+                }
+            })
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#deleteAllButton").click(function () {
+
+                var selected = [];
+
+                $("#usersTable input[name=delete_select]:checked").each(function () {
+                    selected.push(this.value);
+                });
+
+                if (selected.length > 0) {
+                    $('#deleteAllModal').modal('show')
+                    $('input[id="delete_select_id"]').val(selected);
+                }
+            });
+        });
+    </script>
+@endpush

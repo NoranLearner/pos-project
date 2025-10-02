@@ -21,7 +21,7 @@ class UserController extends Controller
         $this->middleware(['permission:users_read'])->only('index');
         $this->middleware(['permission:users_create'])->only('create');
         $this->middleware(['permission:users_update'])->only('edit');
-        $this->middleware(['permission:users_delete'])->only('destroy');
+        $this->middleware(['permission:users_delete'])->only(['destroy', 'deleteAll']);
     }
 
     /**
@@ -36,19 +36,19 @@ class UserController extends Controller
         if ($user->hasRole('super_admin')) {
 
             $users = User::whereHasRole(['user', 'admin', 'super_admin'])->where(function ($q) use ($request) {
-                    return $q->when($request->search, function ($query) use ($request) {
-                        return $query->where('name', 'like', '%' . $request->search . '%')
-                            ->orWhere('email', 'like', '%' . $request->search . '%');
-                    });
+                return $q->when($request->search, function ($query) use ($request) {
+                    return $query->where('name', 'like', '%' . $request->search . '%')
+                        ->orWhere('email', 'like', '%' . $request->search . '%');
+                });
             })->latest()->paginate(8);
 
         } else {
 
             $users = User::whereHasRole(['user', 'admin'])->where(function ($q) use ($request) {
-                    return $q->when($request->search, function ($query) use ($request) {
-                        return $query->where('name', 'like', '%' . $request->search . '%')
-                            ->orWhere('email', 'like', '%' . $request->search . '%');
-                    });
+                return $q->when($request->search, function ($query) use ($request) {
+                    return $query->where('name', 'like', '%' . $request->search . '%')
+                        ->orWhere('email', 'like', '%' . $request->search . '%');
+                });
             })->orderBy('created_at', 'desc')->paginate(8);
 
         }
@@ -148,7 +148,7 @@ class UserController extends Controller
             // Delete old image
             if ($user->image) {
                 $old_image = $user->image->file;
-                $this->Delete_attachment('upload_image', 'users/'.$old_image, $user->id);
+                $this->Delete_attachment('upload_image', 'users/' . $old_image, $user->id);
             }
             // Store new image
             $this->verifyAndStoreImage($request, 'image', 'users', 'upload_image', $user->id, User::class);
@@ -167,12 +167,41 @@ class UserController extends Controller
     {
         if ($user->image && $user->image->file) {
             $old_image = $user->image->file;
-            $this->Delete_attachment('upload_image', 'users/'.$old_image, $user->id);
+            $this->Delete_attachment('upload_image', 'users/' . $old_image, $user->id);
         }
+
         $user->removeRoles();
         $user->permissions()->detach();
         $user->delete();
+
         Alert::toast(__('site.delete_successfully'), 'warning')->timerProgressBar();
         return redirect()->route('dashboard.users.index');
     }
+
+    public function deleteAll(Request $request)
+    {
+
+        // @dd($request->delete_select_id);
+
+        $ids = explode(",", $request->delete_select_id);
+
+        foreach ($ids as $user_id) {
+
+            $user = User::findOrFail($user_id);
+
+            if ($user->image && $user->image->file) {
+                $old_image = $user->image->file;
+                $this->Delete_attachment('upload_image', 'users/' . $old_image, $user->id);
+            }
+
+            $user->removeRoles();
+            $user->permissions()->detach();
+            $user->delete();
+        }
+
+        Alert::toast(__('site.delete_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.users.index');
+
+    }
+
 }
