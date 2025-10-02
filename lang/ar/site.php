@@ -16,6 +16,7 @@ return [
     'edit' => 'تعديل',
     'update' => 'تحديث',
     'delete' => 'حذف',
+    'delete_all' => 'حذف الكل',
     'read' => 'عرض',
     'view' => 'عرض',
     'save' => 'حفظ',

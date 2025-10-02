@@ -16,6 +16,7 @@ return [
     'edit' => 'Edit',
     'update' => 'Update',
     'delete' => 'Delete',
+    'delete_all' => 'Delete All',
     'read' => 'Read',
     'view' => 'View',
     'save' => 'Save',

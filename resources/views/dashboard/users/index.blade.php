@@ -58,8 +58,23 @@
 
                         <div class="flex items-center">
 
-                            {{-- Add User Button --}}
                             <div class="w-full flex-auto">
+
+                                {{-- Delete All Button --}}
+                                @if (auth()->user()->hasPermission('users_delete'))
+                                    {{-- Using Modal --}}
+                                    <button type="button" class="btn btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300"
+                                        data-toggle="modal" data-target="#deleteAllModal">
+                                        <i class="fa fa-trash"></i> @lang('site.delete_all')
+                                    </button>
+                                    @include('partials.delete_all_user_modal')
+                                @else
+                                    <button class="btn btn-danger opacity-50 cursor-not-allowed hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
+                                        <i class="fa fa-trash"></i> @lang('site.delete_all')
+                                    </button>
+                                @endif
+
+                                {{-- Add User Button --}}
                                 @if (auth()->user()->hasPermission('users_create'))
                                     <a href="{{ route('dashboard.users.create') }}"
                                         class="btn m-4 bg-green-500 hover:bg-green-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-green-300">
@@ -71,6 +86,7 @@
                                         <i class="fa fa-plus"></i> @lang('site.user_add')
                                     </a>
                                 @endif
+
                             </div>
 
                             {{-- Search input --}}
