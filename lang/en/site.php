@@ -17,7 +17,6 @@ return [
     'update' => 'Update',
     'delete' => 'Delete',
     'delete_all' => 'Delete All',
-    'delete_all_warning' => 'Are you sure you want to delete all?',
     'read' => 'Read',
     'view' => 'View',
     'save' => 'Save',
@@ -40,6 +39,7 @@ return [
     'are_you_sure' => 'Are you sure?',
     'confirm_delete' => 'Confirm Delete',
     'delete_warning' => 'Are you sure you want to delete',
+    'delete_all_warning' => 'Are you sure you want to delete all?',
     'yes' => 'Yes',
     'no' => 'No',
 

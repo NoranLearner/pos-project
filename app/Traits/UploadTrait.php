@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
+use Intervention\Image\Facades\Image as InterventionImage;
 
 trait UploadTrait{
 
@@ -23,8 +24,10 @@ trait UploadTrait{
 
             $photo = $request->file($inputname);
 
-            $name = Str::slug($request->input('name'));
+            $name = Str::slug($request->input('name', 'file'));
             $filename = $name . '-' . uniqid() . '.' . $photo->getClientOriginalExtension();
+
+            $path = $foldername . '/' . $filename;
 
             // insert Image
             $Image = new Image();
@@ -33,7 +36,19 @@ trait UploadTrait{
             $Image->imageable_type = $imageable_type;
             $Image->save();
 
-            return $request->file($inputname)->storeAs($foldername, $filename, $disk);
+            // Resize & save with Intervention
+
+            $fullPath = Storage::disk($disk)->path($path);
+
+            InterventionImage::make($photo)
+                ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save($fullPath);
+
+            // return $request->file($inputname)->storeAs($foldername, $filename, $disk);
+
+            return $path;
 
         }
 
@@ -41,9 +56,7 @@ trait UploadTrait{
 
     }
 
-
     // public function verifyAndStoreImageForeach($varforeach , $foldername , $disk, $imageable_id, $imageable_type) {
-
     //     // insert Image
     //     $Image = new Image();
     //     $Image->filename = $varforeach->getClientOriginalName();

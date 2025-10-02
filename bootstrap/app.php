@@ -36,6 +36,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
             // Sweet Alert Package
             'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+            // Intervention Image Package
+            'InterventionImage' => Intervention\Image\Facades\Image::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

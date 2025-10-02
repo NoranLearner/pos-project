@@ -5,4 +5,5 @@ return [
     // ... other application service providers
     // Your package's service provider
     RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+    Intervention\Image\ImageServiceProvider::class
 ];
