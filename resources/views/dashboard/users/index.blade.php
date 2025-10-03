@@ -70,7 +70,7 @@
                                         class="btn m-4 btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
                                         <i class="fa fa-trash"></i> @lang('site.delete_all')
                                     </button>
-                                    @include('partials.delete_all_user_modal')
+                                    @include('partials.modal.users.delete_all')
                                 @else
                                     <button class="btn m-4 btn-danger opacity-50 cursor-not-allowed hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
                                         <i class="fa fa-trash"></i> @lang('site.delete_all')
@@ -221,7 +221,7 @@
                                                             data-toggle="modal" data-target="#deleteModal-{{ $user->id }}">
                                                             <i class="fa fa-trash"></i> @lang('site.delete')
                                                         </button>
-                                                        @include('partials.delete_user_modal', ['user' => $user])
+                                                        @include('partials.modal.users.delete', ['user' => $user])
                                                     @else
                                                         <button class="btn btn-danger opacity-50 cursor-not-allowed hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
                                                             <i class="fa fa-trash"></i> @lang('site.delete')
