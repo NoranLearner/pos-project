@@ -57,14 +57,22 @@ return [
     'user_role' => 'User Role',
     'select_role' => 'Select Role',
 
-
-    // 'status' => 'Status',
-    // 'active' => 'Active',
-    // 'inactive' => 'Inactive',
-    // 'reset' => 'Reset',
-    // 'created_at' => 'Created At',
-    // 'updated_at' => 'Updated At',
-    // 'created_by' => 'Created By',
-    // 'updated_by' => 'Updated By',
+    // Categories
+    'categories' => 'Categories',
+    'category_add' => 'Add Category',
+    'category_edit' => 'Edit Category',
+    'category_delete' => 'Delete Category',
+    'description' => 'Description',
+    'status' => 'Status',
+    'active' => 'Active',
+    'inactive' => 'Inactive',
+    'available' => 'Available',
+    'unavailable' => 'Unavailable',
+    'created_at' => 'Created At',
+    'updated_at' => 'Updated At',
+    'created_by' => 'Created By',
+    'updated_by' => 'Updated By',
+    'in_en' => 'In English',
+    'in_ar' => 'In Arabic',
 
 ];

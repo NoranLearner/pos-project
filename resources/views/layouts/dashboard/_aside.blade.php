@@ -50,6 +50,34 @@
                 </a>
             </li>
 
+            {{-- For Categories --}}
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    <span>@lang('site.categories')</span>
+                    <ul class="treeview-menu">
+                        {{-- Categories --}}
+                        @if (auth()->user()->hasPermission('categories_read'))
+                            <li>
+                                <a href="{{ route('dashboard.categories.index') }}">
+                                    <i class="fa fa-tags"></i>
+                                    <span>@lang('site.categories')</span>
+                                </a>
+                            </li>
+                        @endif
+                        {{-- Add User --}}
+                        @if (auth()->user()->hasPermission('categories_create'))
+                            <li>
+                                <a href="{{ route('dashboard.categories.create') }}">
+                                    <i class="fa fa-tag"></i>
+                                    <span>@lang('site.category_add')</span>
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                </a>
+            </li>
+
             {{-- @if (auth()->user()->hasPermission('read_categories'))
             <li><a href="{{ route('dashboard.categories.index') }}"><i
                         class="fa fa-th"></i><span>@lang('site.categories')</span></a></li>

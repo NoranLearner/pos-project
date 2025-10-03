@@ -57,15 +57,22 @@ return [
     'user_role' => 'دور المستخدم',
     'select_role' => 'اختر الدور',
 
-
-    // 'status' => 'الحالة',
-    // 'active' => 'نشط',
-    // 'inactive' => 'غير نشط',
-    // 'reset' => 'إعادة تعيين',
-     // 'created_at' => 'تم الانشاء في',
-    // 'updated_at' => 'تم التحديث في',
-    // 'created_by' => 'تم الانشاء بواسطة',
-    // 'updated_by' => 'تم التحديث بواسطة',
-
+    // Categories
+    'categories' => 'الاقسام',
+    'category_add' => 'اضافة قسم',
+    'category_edit' => 'تعديل قسم',
+    'category_delete' => 'حذف قسم',
+    'description' => 'الوصف',
+    'status' => 'الحالة',
+    'active' => 'نشط',
+    'inactive' => 'غير نشط',
+    'available' => 'متاح',
+    'unavailable' => 'غير متاح',
+    'created_at' => 'تم الاضافة في',
+    'updated_at' => 'تم التعديل في',
+    'created_by' => 'تم الاضافة بواسطة',
+    'updated_by' => 'تم التعديل بواسطة',
+    'in_en' => 'بالإنجليزية',
+    'in_ar' => 'بالعربية',
 
 ];

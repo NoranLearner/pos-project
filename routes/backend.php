@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -31,8 +32,12 @@ Route::group(
 
             Route::get('/index', [DashboardController::class, 'index'])->name('index');
 
+            // Users Routes
             Route::resource('/users', UserController::class)->names('users');
             Route::delete('users-delete-all', [UserController::class, 'deleteAll'])->name('users.deleteAll');
+
+            // Categories Routes
+            Route::resource('/categories', CategoryController::class)->names('categories');
 
         }); // end of dashboard routes
 
