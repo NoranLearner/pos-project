@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('image')->nullable();
+            // $table->string('image')->nullable();
             $table->foreignId('parent')->nullable()->constrained('categories', 'id')->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();

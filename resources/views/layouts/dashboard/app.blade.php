@@ -30,12 +30,20 @@
             h6 {
                 font-family: 'Cairo', sans-serif !important;
             }
+            .ck-editor{
+                direction: rtl !important;
+            }
         </style>
     @else
         <link rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         <link rel="stylesheet" href="{{ asset('dashboard_files/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('dashboard_files/css/AdminLTE.min.css') }}">
+        <style>
+            .ck-editor{
+                direction: ltr !important;
+            }
+        </style>
     @endif
 
     <style>
@@ -78,6 +86,9 @@
 
     {{--<!-- jQuery 3 -->--}}
     <script src="{{ asset('dashboard_files/js/jquery.min.js') }}"></script>
+
+    {{-- CK Editor --}}
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/45.2.0/ckeditor5.css" />
 
     {{--noty--}}
     {{-- <link rel="stylesheet" href="{{ asset('dashboard_files/plugins/noty/noty.css') }}">
@@ -335,6 +346,11 @@
     {{--morris --}}
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="{{ asset('dashboard_files/plugins/morris/morris.min.js') }}"></script> --}}
+
+    {{-- CK Editor --}}
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/45.2.0/ckeditor.js"></script> --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.0/classic/ckeditor.js"></script>
+    <script src="{{ asset('dashboard_files/js/custom/ck_editor.js') }}"></script>
 
     {{--custom js--}}
     <script src="{{ asset('dashboard_files/js/custom/image_preview.js') }}"></script>

@@ -16,7 +16,7 @@ class Category extends Model implements TranslatableContract
     use SoftDeletes;
 
     public $translatedAttributes = ['name', 'description'];
-    protected $fillable = ['image', 'parent', 'deleted_at'];
+    protected $fillable = ['parent', 'deleted_at'];
 
     // Self Relationship
 
