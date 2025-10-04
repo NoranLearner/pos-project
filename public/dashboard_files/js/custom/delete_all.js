@@ -17,7 +17,7 @@ $(function () {
 
         var selected = [];
 
-        $("#my-table input[name=delete_select]:checked").each(function () {
+        $(".my-table input[name=delete_select]:checked").each(function () {
             selected.push(this.value);
         });
 

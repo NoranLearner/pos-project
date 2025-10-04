@@ -98,7 +98,7 @@
 
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-                            <table class="w-full text-xl text-left rtl:text-right text-gray-500" id="my-table">
+                            <table class="my-table w-full text-xl text-left rtl:text-right text-gray-500" id="myTable">
 
                                 <thead class="text-lg text-gray-700 uppercase bg-gray-50">
                                     <tr>
@@ -266,3 +266,9 @@
     </div>
 
 @endsection
+
+@push('scripts')
+    {{-- <script>
+        let table = new DataTable('#myTable');
+    </script> --}}
+@endpush

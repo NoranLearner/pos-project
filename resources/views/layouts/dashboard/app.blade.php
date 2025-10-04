@@ -90,6 +90,9 @@
     {{-- CK Editor --}}
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/45.2.0/ckeditor5.css" />
 
+    {{-- For Data Table --}}
+    {{-- <link href="https://cdn.datatables.net/v/bs/jszip-3.10.1/dt-2.3.4/b-3.2.5/b-html5-3.2.5/b-print-3.2.5/datatables.min.css" rel="stylesheet" integrity="sha384-k3ht0xpLiVuZDY7gkYLt1FMYDn3d1bt89+/ANFyjQsiCeJ2pQDRIC/vh062Rfixs" crossorigin="anonymous"> --}}
+
     {{--noty--}}
     {{-- <link rel="stylesheet" href="{{ asset('dashboard_files/plugins/noty/noty.css') }}">
     <script src="{{ asset('dashboard_files/plugins/noty/noty.min.js') }}"></script> --}}
@@ -358,6 +361,9 @@
 
     {{-- For Delete All --}}
     <script src="{{ asset('dashboard_files/js/custom/delete_all.js') }}"></script>
+
+    {{-- For Data Table --}}
+    {{-- <script src="https://cdn.datatables.net/v/bs/jszip-3.10.1/dt-2.3.4/b-3.2.5/b-html5-3.2.5/b-print-3.2.5/datatables.min.js" integrity="sha384-IEtxkDm+KXERTtDz8EHbs07Sv0r31HyNom4p+ttbsrVtleKUaliHVljXBEmSswhZ" crossorigin="anonymous"></script> --}}
 
     <script>
         // $(document).ready(function () {
