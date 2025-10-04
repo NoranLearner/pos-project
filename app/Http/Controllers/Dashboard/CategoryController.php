@@ -56,14 +56,14 @@ class CategoryController extends Controller
 
         foreach ($locales as $localeCode => $properties) {
             $rules["{$localeCode}.name"] = 'required|string';
-            $rules["{$localeCode}.description"] = 'required|string';
+            $rules["{$localeCode}.description"] = 'nullable|string';
         }
 
         $validatedData = $request->validate($rules);
 
         $category = Category::create($validatedData);
 
-        if ($request->file('image')) {
+        if ($request->hasFile('image')) {
             $this->verifyAndStoreImage($request, 'image', 'categories', 'upload_image', $category->id, Category::class);
         }
 
@@ -85,7 +85,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $categories = Category::all();
+        return view('dashboard.categories.edit', compact(['category', 'categories']));
     }
 
     /**
@@ -93,7 +94,35 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $locales = LaravelLocalization::getSupportedLocales();
+
+        $rules = [
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'parent' => 'nullable',
+        ];
+
+        foreach ($locales as $localeCode => $properties) {
+            $rules["{$localeCode}.name"] = 'required|string';
+            $rules["{$localeCode}.description"] = 'nullable|string';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        $category->update($validatedData);
+
+        if ($request->hasFile('image')) {
+            // Delete old image
+            if ($category->image) {
+                $old_image = $category->image->file;
+                $this->Delete_attachment('upload_image', 'categories/' . $old_image, $category->id);
+            }
+            // Store new image
+            $this->verifyAndStoreImage($request, 'image', 'categories', 'upload_image', $category->id, Category::class);
+        }
+
+        Alert::toast(__('site.updated_successfully'), 'success')->timerProgressBar();
+
+        return redirect()->route('dashboard.categories.index');
     }
 
     /**

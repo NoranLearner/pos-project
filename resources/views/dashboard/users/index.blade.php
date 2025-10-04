@@ -139,7 +139,7 @@
                                                             src="{{ asset('dashboard_files/img/default.jpg') }}" alt="user image">
                                                     @endif
                                                     <div class="ps-3">
-                                                        <div class="text-xl font-medium">{{ $user->name }}</div>
+                                                        <div class="text-gray-500 font-semibold">{{ $user->name }}</div>
                                                     </div>
                                                 </th>
                                                 {{-- For Email --}}
