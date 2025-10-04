@@ -22,6 +22,7 @@ return [
     'save' => 'حفظ',
     'cancel' => 'إلغاء',
     'search' => 'بحث',
+    'export' => 'تصدير',
     'requirements' => 'تأكد من استيفاء هذه المتطلبات',
     'added_successfully' => 'تمت الإضافة بنجاح',
     'updated_successfully' => 'تم التحديث بنجاح',

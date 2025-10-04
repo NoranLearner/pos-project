@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Traits\UploadTrait;
+use Illuminate\Http\Request;
+use App\Exports\CategoriesExport;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class CategoryController extends Controller
 {
@@ -16,7 +18,7 @@ class CategoryController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['permission:categories_read'])->only('index');
+        $this->middleware(['permission:categories_read'])->only('index', 'export');
         $this->middleware(['permission:categories_create'])->only('create');
         $this->middleware(['permission:categories_update'])->only('edit');
         $this->middleware(['permission:categories_delete'])->only(['destroy', 'restore', 'forceDelete', 'deleteAll']);
@@ -182,6 +184,12 @@ class CategoryController extends Controller
         Alert::toast(__('site.delete_successfully'), 'warning')->timerProgressBar();
         return redirect()->route('dashboard.categories.index');
 
+    }
+
+    public function export()
+    {
+        return Excel::download(new CategoriesExport, 'categories.xlsx');
+        // return Excel::download(new CategoriesExport, 'categories.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
 }

@@ -41,6 +41,7 @@ Route::group(
             Route::get('categories/{id}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
             Route::delete('categories/{id}/forceDelete', [CategoryController::class, 'forceDelete'])->name('categories.forceDelete');
             Route::delete('categories-delete-all', [CategoryController::class, 'deleteAll'])->name('categories.deleteAll');
+            Route::get('categories-export', [CategoryController::class, 'export'])->name('categories.export');
 
         }); // end of dashboard routes
 

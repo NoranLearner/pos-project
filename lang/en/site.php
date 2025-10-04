@@ -22,6 +22,7 @@ return [
     'save' => 'Save',
     'cancel' => 'Cancel',
     'search' => 'Search',
+    'export' => 'Export',
     'requirements' => 'Ensure that these requirements are met',
     'added_successfully' => 'Added Successfully',
     'updated_successfully' => 'Updated Successfully',

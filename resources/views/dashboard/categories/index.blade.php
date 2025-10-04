@@ -60,6 +60,19 @@
                                 </a>
                             @endif
 
+                            {{-- Export Excel --}}
+                            @if (auth()->user()->hasPermission('categories_read'))
+                                <a href="{{ route('dashboard.categories.export') }}"
+                                    class="btn m-4 bg-sky-500 hover:bg-sky-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-300">
+                                    <i class="fa fa-download"></i> @lang('site.export')
+                                </a>
+                            @else
+                                <a href="#"
+                                    class="btn m-4 bg-sky-500 opacity-50 cursor-not-allowed text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-300">
+                                    <i class="fa fa-download"></i> @lang('site.export')
+                                </a>
+                            @endif
+
                         </div>
 
                         {{-- Search input --}}
