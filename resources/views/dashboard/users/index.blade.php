@@ -26,37 +26,6 @@
 
                 <div class="box box-primary">
 
-                    {{-- <div class="box-header with-border">
-
-                        <h3 class="box-title" style="margin-bottom: 15px">@lang('site.users') <small>{{ $users->total()
-                                }}</small></h3>
-
-                        <form action="{{ route('dashboard.users.index') }}" method="get">
-
-                            <div class="row">
-
-                                <div class="col-md-4">
-                                    <input type="text" name="search" class="form-control" placeholder="@lang('site.search')"
-                                        value="{{ request()->search }}">
-                                </div>
-
-                                <div class="col-md-4">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>
-                                        @lang('site.search')</button>
-                                    @if (auth()->user()->hasPermission('create_users'))
-                                    <a href="{{ route('dashboard.users.create') }}" class="btn btn-primary"><i
-                                            class="fa fa-plus"></i> @lang('site.add')</a>
-                                    @else
-                                    <a href="#" class="btn btn-primary disabled"><i class="fa fa-plus"></i>
-                                        @lang('site.add')</a>
-                                    @endif
-                                </div>
-
-                            </div>
-                        </form>
-
-                    </div> --}}
-
                     <div class="box-header">
 
                         <div class="flex items-center">
@@ -167,7 +136,7 @@
                                                             src="{{ asset('dashboard/imgs/users/' . $user->image->file) }}" alt="user image">
                                                     @else
                                                         <img class="w-12 h-12 rounded-full"
-                                                            src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" alt="user image">
+                                                            src="{{ asset('dashboard_files/img/default.jpg') }}" alt="user image">
                                                     @endif
                                                     <div class="ps-3">
                                                         <div class="text-xl font-medium">{{ $user->name }}</div>

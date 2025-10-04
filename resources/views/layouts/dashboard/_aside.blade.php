@@ -7,7 +7,7 @@
                 @if (auth()->user()->image)
                     <img src="{{ asset('dashboard/imgs/users/' . auth()->user()->image->file) }}" class="img-circle" alt="user image">
                 @else
-                    <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle" alt="user image">
+                    <img src="{{ asset('dashboard_files/img/default.jpg') }}" class="img-circle" alt="user image">
                 @endif
             </div>
             <div class="pull-left info">
@@ -19,8 +19,12 @@
         <ul class="sidebar-menu" data-widget="tree">
 
             {{-- For Dashboard --}}
-            <li><a href="{{ route('dashboard.index') }}"><i
-                        class="fa fa-dashboard"></i><span>@lang('site.dashboard')</span></a></li>
+            <li>
+                <a href="{{ route('dashboard.index') }}">
+                    <i class="fa fa-dashboard"></i>
+                    <span>@lang('site.dashboard')</span>
+                </a>
+            </li>
 
             {{-- For Users --}}
             <li class="treeview">

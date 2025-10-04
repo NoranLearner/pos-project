@@ -24,10 +24,6 @@
 
             <div class="box box-primary">
 
-                {{-- <div class="box-header">
-                    <h3 class="box-title">@lang('site.add')</h3>
-                </div> --}}
-
                 <div class="box-body">
 
                     @include('partials._errors')
@@ -49,7 +45,7 @@
                             @enderror
                         </div>
                         <div class="form-group mb-5">
-                            <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" style="width: 100px"
+                            <img src="{{ asset('dashboard_files/img/default.jpg') }}" style="width: 100px"
                                 class="img-thumbnail image-preview" id="image-prv" alt="user image">
                         </div>
 
@@ -129,7 +125,7 @@
 
                                 @php
                                     // $models = ['users', 'categories', 'products', 'clients', 'orders'];
-                                    $models = ['users'];
+                                    $models = ['users', 'categories'];
                                     $maps = ['create', 'read', 'update', 'delete'];
                                 @endphp
 
@@ -185,16 +181,4 @@
     <script>
         document.getElementById("image").value = '';
     </script>
-    {{-- public/dashboard_files/js/custom/image_preview.js --}}
-    {{--
-    <script>
-        document.getElementById("image").value = '';
-        function showPreview(event) {
-            if (event.target.files.length > 0) {
-                let src = URL.createObjectURL(event.target.files[0]);
-                let pv = document.getElementById('image-prv');
-                pv.src = src;
-            }
-        }
-    </script> --}}
 @endpush

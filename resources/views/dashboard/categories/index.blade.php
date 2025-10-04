@@ -98,7 +98,7 @@
 
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-                            <table class="w-full text-xl text-left rtl:text-right text-gray-500" id="categoriesTable">
+                            <table class="w-full text-xl text-left rtl:text-right text-gray-500" id="my-table">
 
                                 <thead class="text-lg text-gray-700 uppercase bg-gray-50">
                                     <tr>
@@ -204,6 +204,15 @@
                                                 @endif
                                                 {{-- For Delete --}}
                                                 @if (auth()->user()->hasPermission('categories_delete'))
+                                                    {{-- <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="post"
+                                                                class="inline-block">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button type="submit"
+                                                                    class="btn btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
+                                                                    <i class="fa fa-trash"></i> @lang('site.delete')
+                                                                </button>
+                                                            </form> --}}
                                                     {{-- Using Modal --}}
                                                     <button type="button" class="btn btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300"
                                                         data-toggle="modal" data-target="#deleteModal-{{ $category->id }}">
@@ -229,7 +238,7 @@
                                 {{-- {{ $categories->links('pagination::bootstrap-4') }} --}}
                                 {{-- {{ $categories->links('vendor.pagination.tailwind') }} --}}
                                 {{-- {{ $categories->links('pagination::tailwind') }} --}}
-                                {{-- {{ $categories->appends(request()->query())->links('pagination::bootstrap-4') }} --}}
+                                {{ $categories->appends(request()->query())->links('pagination::bootstrap-4') }}
                             </div>
 
                         </div>
@@ -247,39 +256,3 @@
     </div>
 
 @endsection
-
-{{-- @push('scripts')
-<script>
-    $(function () {
-        $('#select_all').click(function () {
-            if (this.checked) {
-                $('.delete_select').each(function () {
-                    this.checked = true;
-                })
-            } else {
-                $('.delete_select').each(function () {
-                    this.checked = false;
-                })
-            }
-        })
-    });
-</script>
-
-<script type="text/javascript">
-    $(function () {
-        $("#deleteAllButton").click(function () {
-
-            var selected = [];
-
-            $("#usersTable input[name=delete_select]:checked").each(function () {
-                selected.push(this.value);
-            });
-
-            if (selected.length > 0) {
-                $('#deleteAllModal').modal('show')
-                $('input[id="delete_select_id"]').val(selected);
-            }
-        });
-    });
-</script>
-@endpush --}}

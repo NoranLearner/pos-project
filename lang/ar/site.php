@@ -71,6 +71,8 @@ return [
     'inactive' => 'غير نشط',
     'available' => 'متاح',
     'unavailable' => 'غير متاح',
+    'activate' => 'تفعيل',
+    'deactivate' => 'الغاء التفعيل',
     'created_at' => 'تم الاضافة في',
     'updated_at' => 'تم التعديل في',
     'created_by' => 'تم الاضافة بواسطة',

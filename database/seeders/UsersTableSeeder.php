@@ -20,6 +20,8 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('12345678'),
         ]);
 
+        $user->image()->create(['file' => 'super_admin.jpg']);
+
         $user->addRole('super_admin');
 
         // Get all existing permissions

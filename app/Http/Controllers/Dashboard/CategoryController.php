@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::withTrashed()->with('parentData')->get();
+        $categories = Category::withTrashed()->with('parentData')->latest()->paginate(5);
         return view('dashboard.categories.index', compact('categories'));
     }
 

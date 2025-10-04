@@ -71,6 +71,8 @@ return [
     'inactive' => 'Inactive',
     'available' => 'Available',
     'unavailable' => 'Unavailable',
+    'activate' => 'Activate',
+    'deactivate' => 'Deactivate',
     'created_at' => 'Created At',
     'updated_at' => 'Updated At',
     'created_by' => 'Created By',

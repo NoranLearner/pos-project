@@ -45,7 +45,7 @@
                         </div>
                         <div class="form-group mb-5">
                             @if (!$user->image)
-                                <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" style="width: 100px" class="img-thumbnail image-preview"
+                                <img src="{{ asset('dashboard_files/img/default.jpg') }}" style="width: 100px" class="img-thumbnail image-preview"
                                 id="image-prv" alt="user image">
                             @else
                                 <img src="{{ asset('dashboard/imgs/users/' . $user->image->file) }}" style="width: 100px" class="img-thumbnail image-preview"
@@ -125,7 +125,7 @@
 
                                 @php
                                     // $models = ['users', 'categories', 'products', 'clients', 'orders'];
-                                    $models = ['users'];
+                                    $models = ['users', 'categories'];
                                     $maps = ['create', 'read', 'update', 'delete'];
                                 @endphp
 
