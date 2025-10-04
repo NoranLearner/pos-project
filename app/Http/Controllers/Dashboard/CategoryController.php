@@ -19,7 +19,7 @@ class CategoryController extends Controller
         $this->middleware(['permission:categories_read'])->only('index');
         $this->middleware(['permission:categories_create'])->only('create');
         $this->middleware(['permission:categories_update'])->only('edit');
-        $this->middleware(['permission:categories_delete'])->only(['destroy', 'deleteAll', 'restore', 'forceDelete']);
+        $this->middleware(['permission:categories_delete'])->only(['destroy', 'restore', 'forceDelete', 'deleteAll']);
     }
 
     /**
@@ -155,9 +155,33 @@ class CategoryController extends Controller
         }
 
         $category->forceDelete();
-        
+
         Alert::toast(__('site.delete_successfully'), 'warning')->timerProgressBar();
         return redirect()->route('dashboard.categories.index');
+    }
+
+    public function deleteAll(Request $request)
+    {
+
+        // @dd($request->delete_select_id);
+
+        $ids = explode(",", $request->delete_select_id);
+
+        foreach ($ids as $category_id) {
+
+            $category = Category::findOrFail($category_id);
+
+            if ($category->image && $category->image->file) {
+                $old_image = $category->image->file;
+                $this->Delete_attachment('upload_image', 'categories/' . $old_image, $category->id);
+            }
+
+            $category->forceDelete();
+        }
+
+        Alert::toast(__('site.delete_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.categories.index');
+
     }
 
 }

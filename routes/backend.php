@@ -38,9 +38,9 @@ Route::group(
 
             // Categories Routes
             Route::resource('/categories', CategoryController::class)->names('categories');
-            //
             Route::get('categories/{id}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
             Route::delete('categories/{id}/forceDelete', [CategoryController::class, 'forceDelete'])->name('categories.forceDelete');
+            Route::delete('categories-delete-all', [CategoryController::class, 'deleteAll'])->name('categories.deleteAll');
 
         }); // end of dashboard routes
 
