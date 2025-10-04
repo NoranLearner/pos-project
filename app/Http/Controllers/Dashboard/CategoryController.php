@@ -19,7 +19,7 @@ class CategoryController extends Controller
         $this->middleware(['permission:categories_read'])->only('index');
         $this->middleware(['permission:categories_create'])->only('create');
         $this->middleware(['permission:categories_update'])->only('edit');
-        $this->middleware(['permission:categories_delete'])->only(['destroy', 'deleteAll']);
+        $this->middleware(['permission:categories_delete'])->only(['destroy', 'deleteAll', 'restore', 'forceDelete']);
     }
 
     /**
@@ -130,6 +130,25 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        Alert::toast(__('site.change_status_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.categories.index');
     }
+
+    public function restore($id)
+    {
+        $category = Category::withTrashed()->findOrFail($id);
+        $category->restore();
+
+        Alert::toast(__('site.change_status_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.categories.index');
+    }
+
+    // public function forceDelete(Category $category){
+    //     $category->clearMediaCollection('category_image');
+    //     $category->forceDelete();
+    //     return to_route('dashboard.categories.index');
+    // }
+
 }

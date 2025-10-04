@@ -26,6 +26,7 @@ return [
     'added_successfully' => 'Added Successfully',
     'updated_successfully' => 'Updated Successfully',
     'delete_successfully' => 'Deleted Successfully',
+    'change_status_successfully' => 'Change Status Successfully',
     'permissions' => 'Permissions',
     'invalid_image' => 'Invalid Image!',
     '403_title' => 'Access Denied',

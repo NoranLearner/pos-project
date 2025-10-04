@@ -26,6 +26,7 @@ return [
     'added_successfully' => 'تمت الإضافة بنجاح',
     'updated_successfully' => 'تم التحديث بنجاح',
     'delete_successfully' => 'تم الحذف بنجاح',
+    'change_status_successfully' => 'تم تغيير الحالة بنجاح',
     'permissions' => 'الصلاحيات',
     'invalid_image' => 'صورة غير صالحة!',
     '403_title' => 'غير مسموح بالدخول',

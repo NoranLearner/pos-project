@@ -204,21 +204,31 @@
                                                 @endif
                                                 {{-- For Delete --}}
                                                 @if (auth()->user()->hasPermission('categories_delete'))
-                                                    {{-- <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="post"
-                                                                class="inline-block">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <button type="submit"
-                                                                    class="btn btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
-                                                                    <i class="fa fa-trash"></i> @lang('site.delete')
-                                                                </button>
-                                                            </form> --}}
+
+                                                    {{-- For Change Status --}}
+                                                    @if ($category->deleted_at == '')
+                                                        <form action="{{ route('dashboard.categories.destroy', $category->id) }}" method="post" class="inline-block">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="btn bg-gray-400 hover:bg-gray-500 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-gray-300">
+                                                                <i class="fa fa-gear"></i> @lang('site.deactivate')
+                                                            </button>
+                                                        </form>
+                                                    @else
+                                                        <a href="{{ route('dashboard.categories.restore', $category->id) }}"
+                                                            class="btn bg-gray-400 hover:bg-gray-500 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-gray-300">
+                                                            <i class="fa fa-gear"></i> @lang('site.activate')
+                                                        </a>
+                                                    @endif
+
                                                     {{-- Using Modal --}}
                                                     <button type="button" class="btn btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300"
                                                         data-toggle="modal" data-target="#deleteModal-{{ $category->id }}">
                                                         <i class="fa fa-trash"></i> @lang('site.delete')
                                                     </button>
                                                     {{-- @include('partials.modal.users.delete', ['category' => $category]) --}}
+
                                                 @else
                                                     <button class="btn btn-danger opacity-50 cursor-not-allowed hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
                                                         <i class="fa fa-trash"></i> @lang('site.delete')
