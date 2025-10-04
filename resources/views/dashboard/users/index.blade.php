@@ -123,7 +123,7 @@
 
                             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-                                <table class="w-full text-xl text-left rtl:text-right text-gray-500" id="usersTable">
+                                <table class="w-full text-xl text-left rtl:text-right text-gray-500" id="my-table">
 
                                     <thead class="text-lg text-gray-700 uppercase bg-gray-50">
                                         <tr>
@@ -256,39 +256,3 @@
         </div>
 
 @endsection
-
-@push('scripts')
-    <script>
-        $(function(){
-            $('#select_all').click(function(){
-                if(this.checked){
-                    $('.delete_select').each(function(){
-                        this.checked = true;
-                    })
-                }else{
-                    $('.delete_select').each(function(){
-                        this.checked = false;
-                    })
-                }
-            })
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(function () {
-            $("#deleteAllButton").click(function () {
-
-                var selected = [];
-
-                $("#usersTable input[name=delete_select]:checked").each(function () {
-                    selected.push(this.value);
-                });
-
-                if (selected.length > 0) {
-                    $('#deleteAllModal').modal('show')
-                    $('input[id="delete_select_id"]').val(selected);
-                }
-            });
-        });
-    </script>
-@endpush

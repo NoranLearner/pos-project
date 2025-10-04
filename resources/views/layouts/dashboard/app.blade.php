@@ -356,6 +356,9 @@
     <script src="{{ asset('dashboard_files/js/custom/image_preview.js') }}"></script>
     <script src="{{ asset('dashboard_files/js/custom/order.js') }}"></script>
 
+    {{-- For Delete All --}}
+    <script src="{{ asset('dashboard_files/js/custom/delete_all.js') }}"></script>
+
     <script>
         // $(document).ready(function () {
 
