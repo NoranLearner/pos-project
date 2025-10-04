@@ -27,9 +27,26 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::withTrashed()->with('parentData')->latest()->paginate(5);
+        // $categories = Category::withTrashed()->with('parentData')->latest()->paginate(5);
+
+        $categories = Category::withTrashed()
+            ->with(['parentData', 'translations'])
+            ->where(function ($q) use ($request) {
+                return $q->when($request->search, function ($query) use ($request) {
+                    // بحث في الاسم والوصف (بناءً على الترجمة)
+                    $query->whereTranslationLike('name', '%' . $request->search . '%')
+                        ->orWhereTranslationLike('description', '%' . $request->search . '%')
+                        // أو نبحث عن الاسم في تصنيف الأب
+                        ->orWhereHas('parentData.translations', function ($q2) use ($request) {
+                        $q2->where('name', 'like', '%' . $request->search . '%');
+                    });
+                });
+            })
+            ->latest()
+            ->paginate(5);
+
         return view('dashboard.categories.index', compact('categories'));
     }
 

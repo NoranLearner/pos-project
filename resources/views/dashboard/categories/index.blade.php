@@ -76,8 +76,8 @@
                         </div>
 
                         {{-- Search input --}}
-                        {{-- <div class="w-full flex-auto m-4">
-                            <form class="max-w-md mx-auto" action="{{ route('dashboard.users.index') }}" method="get">
+                        <div class="w-full flex-auto m-4">
+                            <form class="max-w-md mx-auto" action="{{ route('dashboard.categories.index') }}" method="get">
                                 <label for="default-search"
                                     class="mb-2 text-lg font-medium text-gray-900 sr-only">@lang('site.search')</label>
                                 <div class="relative">
@@ -97,7 +97,7 @@
                                     </button>
                                 </div>
                             </form>
-                        </div> --}}
+                        </div>
 
                     </div>
 
