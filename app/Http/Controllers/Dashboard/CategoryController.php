@@ -145,10 +145,19 @@ class CategoryController extends Controller
         return redirect()->route('dashboard.categories.index');
     }
 
-    // public function forceDelete(Category $category){
-    //     $category->clearMediaCollection('category_image');
-    //     $category->forceDelete();
-    //     return to_route('dashboard.categories.index');
-    // }
+    public function forceDelete($id){
+
+        $category = Category::withTrashed()->findOrFail($id);
+
+        if ($category->image && $category->image->file) {
+            $old_image = $category->image->file;
+            $this->Delete_attachment('upload_image', 'categories/' . $old_image, $category->id);
+        }
+
+        $category->forceDelete();
+        
+        Alert::toast(__('site.delete_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.categories.index');
+    }
 
 }
