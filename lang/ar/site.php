@@ -90,9 +90,11 @@ return [
     'product_name' => 'اسم المنتج',
     'product_description' => 'وصف المنتج',
     'product_category' => 'قسم المنتج',
+    'select_category' => 'اختر قسم',
     'purchase_price' => 'سعر الشراء',
     'sale_price' => 'سعر البيع',
     'stock' => 'المخزون',
+    'product_images' => 'صور المنتج',
 
     // clients
     'clients' => 'العملاء',

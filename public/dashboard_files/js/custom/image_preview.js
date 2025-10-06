@@ -20,3 +20,21 @@ function showPreview(event) {
 //     }
 
 // });
+
+function showPreviews(event) {
+    const previewContainer = document.getElementById('preview-container');
+    previewContainer.innerHTML = ''; // نحذف الصور القديمة
+
+    const files = event.target.files;
+
+    if (files.length > 0) {
+        Array.from(files).forEach(file => {
+            const src = URL.createObjectURL(file);
+            const img = document.createElement('img');
+            img.src = src;
+            img.style.width = '130px';
+            img.classList.add('img-thumbnail', 'image-preview');
+            previewContainer.appendChild(img);
+        });
+    }
+}

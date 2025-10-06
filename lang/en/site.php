@@ -90,9 +90,11 @@ return [
     'product_name' => 'Product Name',
     'product_description' => 'Product Description',
     'product_category' => 'Product Category',
+    'select_category' => 'Select Category',
     'purchase_price' => 'Purchase Price',
     'sale_price' => 'Sale Price',
     'stock' => 'Stock',
+    'product_images' => 'Product Images',
 
     // clients
     'clients' => 'Clients',

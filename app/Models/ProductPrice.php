@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
 
 class ProductPrice extends Model
 {
-    protected $fillable = ['purchase_price', 'sale_price', 'start_date', 'end_date'];
+    protected $fillable = ['product_id', 'purchase_price', 'sale_price', 'start_date', 'end_date'];
 
     public function product()
     {
