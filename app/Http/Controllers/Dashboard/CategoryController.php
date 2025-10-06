@@ -68,7 +68,7 @@ class CategoryController extends Controller
         ];
 
         foreach ($locales as $localeCode => $properties) {
-            $rules["{$localeCode}.name"] = 'required|string';
+            $rules["{$localeCode}.name"] = 'required|string|unique:categories_translations,name';
             $rules["{$localeCode}.description"] = 'nullable|string';
         }
 
@@ -115,7 +115,7 @@ class CategoryController extends Controller
         ];
 
         foreach ($locales as $localeCode => $properties) {
-            $rules["{$localeCode}.name"] = 'required|string';
+            $rules["{$localeCode}.name"] = 'required|string|unique:categories_translations,name,' . $category->id;
             $rules["{$localeCode}.description"] = 'nullable|string';
         }
 
