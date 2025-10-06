@@ -35,17 +35,11 @@ class CategoryController extends Controller
             ->with(['parentData', 'translations'])
             ->where(function ($q) use ($request) {
                 return $q->when($request->search, function ($query) use ($request) {
-                    // بحث في الاسم والوصف (بناءً على الترجمة)
-                    $query->whereTranslationLike('name', '%' . $request->search . '%')
-                        ->orWhereTranslationLike('description', '%' . $request->search . '%')
-                        // أو نبحث عن الاسم في تصنيف الأب
-                        ->orWhereHas('parentData.translations', function ($q2) use ($request) {
-                        $q2->where('name', 'like', '%' . $request->search . '%');
-                    });
+                    return $query->whereTranslationLike('name', '%' . $request->search . '%')
+                        ->orWhereTranslationLike('description', '%' . $request->search . '%');
                 });
             })
-            ->latest()
-            ->paginate(5);
+            ->latest()->paginate(5);
 
         return view('dashboard.categories.index', compact('categories'));
     }
