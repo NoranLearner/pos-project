@@ -82,4 +82,36 @@ return [
     'in_en' => 'بالإنجليزية',
     'in_ar' => 'بالعربية',
 
+    // Products
+    'products' => 'المنتجات',
+    'product_add' => 'اضافة منتج',
+    'product_edit' => 'تعديل منتج',
+    'product_delete' => 'حذف منتج',
+    'product_name' => 'اسم المنتج',
+    'product_description' => 'وصف المنتج',
+    'product_category' => 'قسم المنتج',
+    'purchase_price' => 'سعر الشراء',
+    'sale_price' => 'سعر البيع',
+    'stock' => 'المخزون',
+
+    // clients
+    'clients' => 'العملاء',
+    'client_add' => 'اضافة عميل',
+    'client_edit' => 'تعديل عميل',
+    'client_delete' => 'حذف عميل',
+    'client_name' => 'اسم العميل',
+    'client_phone' => 'رقم الهاتف',
+    'client_address' => 'العنوان',
+
+    // orders
+    'orders' => 'الطلبات',
+    'order_add' => 'اضافة طلب',
+    'order_edit' => 'تعديل طلب',
+    'order_delete' => 'حذف طلب',
+    'order_client' => 'طلب العميل',
+    'order_product' => 'طلب المنتج',
+    'order_quantity' => 'كمية الطلب',
+    'order_price' => 'سعر الطلب',
+    'order_total' => 'المجموع',
+
 ];

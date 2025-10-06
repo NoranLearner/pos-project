@@ -82,4 +82,36 @@ return [
     'in_en' => 'In English',
     'in_ar' => 'In Arabic',
 
+    // Products
+    'products' => 'Products',
+    'product_add' => 'Add Product',
+    'product_edit' => 'Edit Product',
+    'product_delete' => 'Delete Product',
+    'product_name' => 'Product Name',
+    'product_description' => 'Product Description',
+    'product_category' => 'Product Category',
+    'purchase_price' => 'Purchase Price',
+    'sale_price' => 'Sale Price',
+    'stock' => 'Stock',
+
+    // clients
+    'clients' => 'Clients',
+    'client_add' => 'Add Client',
+    'client_edit' => 'Edit Client',
+    'client_delete' => 'Delete Client',
+    'client_name' => 'Client Name',
+    'client_phone' => 'Client Phone',
+    'client_address' => 'Client Address',
+
+    // orders
+    'orders' => 'Orders',
+    'order_add' => 'Add Order',
+    'order_edit' => 'Edit Order',
+    'order_delete' => 'Delete Order',
+    'order_client' => 'Order Client',
+    'order_product' => 'Order Product',
+    'order_quantity' => 'Order Quantity',
+    'order_price' => 'Order Price',
+    'order_total' => 'Order Total',
+
 ];

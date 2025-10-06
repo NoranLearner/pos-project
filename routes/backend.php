@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Dashboard\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::get('/', function () {
@@ -42,6 +43,9 @@ Route::group(
             Route::delete('categories/{id}/forceDelete', [CategoryController::class, 'forceDelete'])->name('categories.forceDelete');
             Route::delete('categories-delete-all', [CategoryController::class, 'deleteAll'])->name('categories.deleteAll');
             Route::get('categories-export', [CategoryController::class, 'export'])->name('categories.export');
+
+            // Products Routes
+            Route::resource('/products', ProductController::class)->names('products');
 
         }); // end of dashboard routes
 

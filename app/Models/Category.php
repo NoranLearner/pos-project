@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Models\Image;
-
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Translatable;
 
+use Astrotomic\Translatable\Translatable;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model implements TranslatableContract
@@ -33,5 +34,10 @@ class Category extends Model implements TranslatableContract
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }

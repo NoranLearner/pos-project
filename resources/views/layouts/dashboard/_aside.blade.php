@@ -82,6 +82,34 @@
                 </a>
             </li>
 
+            {{-- For Products --}}
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    <span>@lang('site.products')</span>
+                    <ul class="treeview-menu">
+                        {{-- Products --}}
+                        @if (auth()->user()->hasPermission('products_read'))
+                            <li>
+                                <a href="{{ route('dashboard.products.index') }}">
+                                    <i class="fa fa-cart-arrow-down"></i>
+                                    <span>@lang('site.products')</span>
+                                </a>
+                            </li>
+                        @endif
+                        {{-- Add Product --}}
+                        @if (auth()->user()->hasPermission('products_create'))
+                            <li>
+                                <a href="{{ route('dashboard.products.create') }}">
+                                    <i class="fa fa-cart-plus"></i>
+                                    <span>@lang('site.product_add')</span>
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                </a>
+            </li>
+
             {{-- @if (auth()->user()->hasPermission('read_categories'))
             <li><a href="{{ route('dashboard.categories.index') }}"><i
                         class="fa fa-th"></i><span>@lang('site.categories')</span></a></li>
