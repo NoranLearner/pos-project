@@ -271,8 +271,7 @@
                                                             </button>
                                                         </form>
                                                     @else
-                                                        {{-- {{ route('dashboard.products.restore', $product->id) }} --}}
-                                                        <a href=""
+                                                        <a href="{{ route('dashboard.products.restore', $product->id) }}"
                                                             class="btn bg-gray-400 hover:bg-gray-500 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-gray-300">
                                                             <i class="fa fa-gear"></i> @lang('site.activate')
                                                         </a>

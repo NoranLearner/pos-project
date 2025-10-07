@@ -214,7 +214,19 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        Alert::toast(__('site.change_status_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.products.index');
+    }
+
+    public function restore($id)
+    {
+        $product = Product::withTrashed()->findOrFail($id);
+        $product->restore();
+
+        Alert::toast(__('site.change_status_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.products.index');
     }
 
 }
