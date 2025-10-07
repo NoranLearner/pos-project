@@ -205,7 +205,7 @@
                                             {{-- For Purchase Price --}}
                                             <td class="px-6 py-4">
                                                 <div class="font-medium text-gray-500">
-                                                    {{ number_format($product->prices->first()?->purchase_price) ?? __('site.empty_price') }}
+                                                    {{ number_format($product->prices->last()->purchase_price) ?? __('site.empty_price') }}
                                                 </div>
                                             </td>
 
@@ -256,7 +256,7 @@
                                                         <i class="fa fa-edit"></i> @lang('site.edit')
                                                     </a>
                                                 @endif
-                                                
+
                                                 {{-- For Delete --}}
                                                 @if (auth()->user()->hasPermission('products_delete'))
 

@@ -102,7 +102,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        return view('dashboard.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -110,7 +111,72 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        // @dd($request->all());
+
+        $locales = LaravelLocalization::getSupportedLocales();
+
+        $rules = [
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'purchase_price' => 'numeric|min:0',
+            'sale_price' => 'numeric|min:0',
+            'stock' => 'numeric|min:0',
+            'category_id' => 'nullable',
+        ];
+
+        foreach ($locales as $localeCode => $properties) {
+            $rules["{$localeCode}.name"] = 'required|string|max:255';
+            $rules["{$localeCode}.description"] = 'nullable|string';
+        }
+
+        $validatedData = $request->validate($rules);
+
+
+        $product->update($validatedData);
+
+        // تحقق من السعر الحالي
+        $currentPrice = $product->prices()->whereNull('end_date')->latest()->first();
+
+        // لو وضعنا قيمه لسعر الشراء او لسعر البيع
+        if (
+            ($request->filled('purchase_price') || $request->filled('sale_price')) && (
+            $currentPrice?->purchase_price != $validatedData['purchase_price'] ||
+            $currentPrice?->sale_price != $validatedData['sale_price']
+        )) {
+
+            // تقفيل السعر الحالى
+            $product->prices()->where('end_date', null)->update([
+                'end_date' => now()->subDay(),
+            ]);
+
+            // لاضافة سعر الشراء و سعر البيع
+            $product->prices()->create([
+                'purchase_price' => $validatedData['purchase_price'],
+                'sale_price' => $validatedData['sale_price'],
+                'start_date' => now(),
+                'end_date' => null,
+            ]);
+        }
+
+        if ($request->hasFile('images')) {
+
+            // Delete old images
+            if ($product->images) {
+                foreach ($product->images as $image) {
+                    $this->Delete_attachment('upload_image', 'products/' . $image->file, $product->id);
+                }
+            }
+
+            // Store new images
+            foreach ($request->file('images') as $file) {
+                $this->verifyAndStoreImageForeach($file, 'products', 'upload_image', $product->id, Product::class);
+            }
+
+        }
+
+        Alert::toast(__('site.updated_successfully'), 'success')->timerProgressBar();
+
+        return redirect()->route('dashboard.products.index');
+
     }
 
     public function change_sale_price(Request $request){
@@ -119,18 +185,25 @@ class ProductController extends Controller
 
         $product = Product::find($request->product_id);
 
-        // تقفيل السعر الحالى
-        $product->prices()->where('end_date', null)->update([
-            'end_date' => now()->subDay(),
-        ]);
+        // تحقق من السعر الحالي
+        $currentPrice = $product->prices()->whereNull('end_date')->latest()->first();
 
-        // اضافة سعر جديد
-        $product->prices()->create([
-            'purchase_price' => $request->purchase_price,
-            'sale_price' => $request->sale_price,
-            'start_date' => $request->start_date,
-            'end_date' => null,
-        ]);
+        if ($currentPrice?->sale_price != $request->sale_price) {
+
+            // تقفيل السعر الحالى
+            $product->prices()->where('end_date', null)->update([
+                'end_date' => now()->subDay(),
+            ]);
+
+            // اضافة سعر جديد
+            $product->prices()->create([
+                'purchase_price' => $request->purchase_price,
+                'sale_price' => $request->sale_price,
+                'start_date' => $request->start_date,
+                'end_date' => null,
+            ]);
+
+        }
 
         Alert::toast(__('site.updated_successfully'), 'success')->timerProgressBar();
         return redirect()->route('dashboard.products.index');
