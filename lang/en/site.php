@@ -81,6 +81,7 @@ return [
     'updated_by' => 'Updated By',
     'in_en' => 'In English',
     'in_ar' => 'In Arabic',
+    'related_products' => 'Related Products',
 
     // Products
     'products' => 'Products',

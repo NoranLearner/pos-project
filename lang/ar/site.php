@@ -81,6 +81,7 @@ return [
     'updated_by' => 'تم التعديل بواسطة',
     'in_en' => 'بالإنجليزية',
     'in_ar' => 'بالعربية',
+    'related_products' => 'المنتجات المرتبطه',
 
     // Products
     'products' => 'المنتجات',

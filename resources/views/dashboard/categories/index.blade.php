@@ -247,6 +247,17 @@
                                                         <i class="fa fa-trash"></i> @lang('site.delete')
                                                     </button>
                                                 @endif
+                                                {{-- For Show Related Products --}}
+                                                @if (auth()->user()->hasPermission('products_read'))
+                                                    <a href="{{ route('dashboard.products.index', ['category_id' => $category->id]) }}"
+                                                        class="btn bg-white hover:bg-gray-100 text-gray-600 hover:text-gray-600 font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-gray-100 border border-gray-300">
+                                                        <i class="fa fa-cart-arrow-down"></i> @lang('site.related_products')
+                                                    </a>
+                                                @else
+                                                    <a href="#" class="btn opacity-50 cursor-not-allowed bg-white hover:bg-gray-100 text-gray-600 hover:text-gray-600 font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-gray-100 border border-gray-300">
+                                                        <i class="fa fa-cart-arrow-down"></i> @lang('site.related_products')
+                                                    </a>
+                                                @endif
                                             </td>
 
                                         </tr>
