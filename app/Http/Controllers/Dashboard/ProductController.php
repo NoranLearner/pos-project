@@ -246,4 +246,30 @@ class ProductController extends Controller
         return redirect()->route('dashboard.products.index');
     }
 
+    public function deleteAll(Request $request)
+    {
+
+        // @dd($request->delete_select_id);
+
+        $ids = explode(",", $request->delete_select_id);
+
+        foreach ($ids as $product_id) {
+
+            $product = Product::findOrFail($product_id);
+
+            // Delete old images
+            if ($product->images) {
+                foreach ($product->images as $image) {
+                    $this->Delete_attachment('upload_image', 'products/' . $image->file, $product->id);
+                }
+            }
+
+            $product->forceDelete();
+        }
+
+        Alert::toast(__('site.delete_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.products.index');
+
+    }
+
 }

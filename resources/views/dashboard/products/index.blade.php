@@ -27,20 +27,20 @@
 
             <div class="box box-primary">
 
-                {{-- <div class="box-header">
+                <div class="box-header">
 
                     <div class="flex items-center">
 
                         <div class="w-full flex-auto">
 
-                            Delete All Button
-                            @if (auth()->user()->hasPermission('categories_delete'))
-                            Using Modal
+                            {{-- Delete All Button --}}
+                            @if (auth()->user()->hasPermission('products_delete'))
+                            {{-- Using Modal --}}
                             <button type="button" id="deleteAllButton"
                                 class="btn m-4 btn-danger hover:bg-red-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
                                 <i class="fa fa-trash"></i> @lang('site.delete_all')
                             </button>
-                            @include('partials.modal.categories.delete_all')
+                            @include('partials.modal.products.delete_all')
                             @else
                             <button
                                 class="btn m-4 btn-danger opacity-50 cursor-not-allowed hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
@@ -48,61 +48,27 @@
                             </button>
                             @endif
 
-                            Add Category Button
-                            @if (auth()->user()->hasPermission('categories_create'))
-                                <a href="{{ route('dashboard.categories.create') }}"
+                            {{-- Add Product Button --}}
+                            @if (auth()->user()->hasPermission('products_create'))
+                                <a href="{{ route('dashboard.products.create') }}"
                                     class="btn m-4 bg-green-500 hover:bg-green-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-green-300">
-                                    <i class="fa fa-plus"></i> @lang('site.category_add')
+                                    <i class="fa fa-plus"></i> @lang('site.product_add')
                                 </a>
                             @else
                                 <a href="#"
                                     class="btn m-4 bg-green-500 opacity-50 cursor-not-allowed text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-green-300">
-                                    <i class="fa fa-plus"></i> @lang('site.category_add')
-                                </a>
-                            @endif
-
-                            Export Excel
-                            @if (auth()->user()->hasPermission('categories_read'))
-                                <a href="{{ route('dashboard.categories.export') }}"
-                                    class="btn m-4 bg-sky-500 hover:bg-sky-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-300">
-                                    <i class="fa fa-download"></i> @lang('site.export')
-                                </a>
-                            @else
-                                <a href="#"
-                                    class="btn m-4 bg-sky-500 opacity-50 cursor-not-allowed text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-300">
-                                    <i class="fa fa-download"></i> @lang('site.export')
+                                    <i class="fa fa-plus"></i> @lang('site.product_add')
                                 </a>
                             @endif
 
                         </div>
 
-                        Search input
-                        <div class="w-full flex-auto m-4">
-                            <form class="max-w-md mx-auto" action="{{ route('dashboard.categories.index') }}" method="get">
-                                <label for="default-search"
-                                    class="mb-2 text-lg font-medium text-gray-900 sr-only">@lang('site.search')</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                                        </svg>
-                                    </div>
-                                    <input type="search" id="default-search" name="search" value="{{ request()->search }}"
-                                        class="block w-full p-3 ps-10 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                                        placeholder="@lang('site.search')" />
-                                    <button type="submit"
-                                        class="btn absolute end-1.5 bottom-1 bg-blue-700 hover:bg-blue-800 text-white hover:text-white text-md font-medium px-4 py-2 rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-300">
-                                        @lang('site.search')
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                        {{-- Search input --}}
+                        <div class="w-full flex-auto m-4"></div>
 
                     </div>
 
-                </div> --}}
+                </div>
 
                 <div class="box-body">
 
