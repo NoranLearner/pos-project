@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Exports\ProductsExport;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -270,6 +271,12 @@ class ProductController extends Controller
         Alert::toast(__('site.delete_successfully'), 'warning')->timerProgressBar();
         return redirect()->route('dashboard.products.index');
 
+    }
+
+    public function export()
+    {
+        return Excel::download(new ProductsExport, 'products.xlsx');
+        // return Excel::download(new ProductsExport, 'products.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
 }

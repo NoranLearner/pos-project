@@ -50,6 +50,7 @@ Route::group(
             Route::get('products/{id}/restore', [ProductController::class, 'restore'])->name('products.restore');
             Route::delete('products/{id}/forceDelete', [ProductController::class, 'forceDelete'])->name('products.forceDelete');
             Route::delete('products-delete-all', [ProductController::class, 'deleteAll'])->name('products.deleteAll');
+            Route::get('products-export', [ProductController::class, 'export'])->name('products.export');
 
         }); // end of dashboard routes
 
