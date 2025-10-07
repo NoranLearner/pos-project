@@ -41,10 +41,10 @@
                         <div class="mb-5">
                             <label for="multiple_images"
                                 class="block mb-4 text-xl font-medium text-gray-900">@lang('site.product_images')</label>
-                            <input type="file" multiple id="multiple_images" name="image[]"
+                            <input type="file" multiple id="multiple_images" name="images[]"
                                 class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-lg  rounded-lg focus:outline-none cursor-pointer w-auto p-2.5"
                                 required onchange="showPreviews(event)">
-                            @error('image')
+                            @error('images.*')
                                 <span class="text-red-500 text-lg">{{ $message }}</span>
                             @enderror
                         </div>
@@ -165,7 +165,7 @@
 @endsection
 
 @push('scripts')
-    <script>
+    {{-- <script>
         document.getElementById("multiple_images").value = '';
-    </script>
+    </script> --}}
 @endpush

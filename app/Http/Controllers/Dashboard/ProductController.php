@@ -50,8 +50,8 @@ class ProductController extends Controller
         $locales = LaravelLocalization::getSupportedLocales();
 
         $rules = [
-            'image' => 'required',
-            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images' => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'purchase_price' => 'required|numeric|min:0',
             'sale_price' => 'required|numeric|min:0',
             'stock' => 'required|numeric|min:0',
@@ -77,8 +77,8 @@ class ProductController extends Controller
             ]);
         }
 
-        if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $file) {
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
                 $this->verifyAndStoreImageForeach($file, 'products', 'upload_image', $product->id, Product::class);
             }
         }

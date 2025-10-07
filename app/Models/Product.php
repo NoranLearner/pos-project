@@ -30,8 +30,29 @@ class Product extends Model implements TranslatableContract
         return $this->hasMany(ProductPrice::class);
     }
 
-    public function image()
+    public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function oldestImage()
+    {
+        return $this->morphOne(Image::class, 'imageable')->oldestOfMany();
+    }
+
+    public function newestImage()
+    {
+        return $this->morphOne(Image::class, 'imageable')->latestOfMany();
+    }
+
+    public function bestImage()
+    {
+        return $this->morphOne(Image::class, 'imageable')->ofMany('likes', 'max');
+    }
+
+    public function imagesCount()
+    {
+        return $this->morphMany(Image::class, 'imageable')->count();
+    }
+
 }
