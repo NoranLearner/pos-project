@@ -99,6 +99,7 @@ return [
     'start_date' => 'Start Date',
     'stock' => 'Stock',
     'product_images' => 'Product Images',
+    'all_categories' => 'All Categories',
 
     // clients
     'clients' => 'Clients',

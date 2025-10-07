@@ -99,6 +99,7 @@ return [
     'start_date' => 'تاريخ البدء',
     'stock' => 'المخزون',
     'product_images' => 'صور المنتج',
+    'all_categories' => 'جميع الاقسام',
 
     // clients
     'clients' => 'العملاء',

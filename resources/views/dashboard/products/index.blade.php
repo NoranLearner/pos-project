@@ -76,8 +76,83 @@
 
                         </div>
 
-                        {{-- Search input --}}
-                        <div class="w-full flex-auto m-4"></div>
+                        {{-- For Search --}}
+
+                        <div class="w-full flex-auto m-4">
+
+                            {{-- https://flowbite.com/docs/forms/search-input/ --}}
+
+                            <form class="max-w-md mx-auto" action="{{ route('dashboard.products.index') }}" method="get">
+                                @csrf
+
+                                <div class="flex">
+
+                                    <label for="search-dropdown" class="mb-2 text-lg font-medium text-gray-900 sr-only">@lang('site.search')</label>
+
+                                    {{-- Hidden input to store selected category_id --}}
+                                    <input type="hidden" name="category_id" id="selectedCategory" value="{{ request('category_id') }}">
+
+                                    {{-- Category Dropdown Button --}}
+                                    <div class="dropdown relative">
+
+                                        <button
+                                            id="dropdownMenuButton"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                            class="btn dropdown-toggle bg-gray-100 hover:bg-gray-200 font-medium py-2.5 px-4 rounded-s-lg focus:ring-4 focus:outline-none focus:ring-gray-100 text-center text-lg text-gray-900 shrink-0 z-10 inline-flex items-center border border-gray-300     "
+                                            type="button">
+                                            {{-- عرض اسم القسم المختار أو كل الأقسام --}}
+                                            {{-- @lang('site.all_categories') --}}
+                                            {{ $categories->firstWhere('id', request('category_id'))?->name ?? __('site.all_categories') }}
+                                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                                            </svg>
+                                        </button>
+
+                                        <div class="dropdown-menu z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+                                            <ul class="py-2 text-lg text-gray-700" aria-labelledby="dropdownMenuButton">
+                                                <li>
+                                                    <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100" onclick="selectCategory('', '@lang('site.all_categories')')">
+                                                        @lang('site.all_categories')
+                                                    </button>
+                                                </li>
+                                                @foreach ($categories as $category)
+                                                    <li class="dropdown-item">
+                                                        <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100"
+                                                            onclick="selectCategory('{{ $category->id }}', '{{ $category->name }}')">
+                                                            {{ $category->name }}
+                                                        </button>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+
+                                    </div>
+
+                                    {{-- Search input --}}
+                                    <div class="relative w-full">
+
+                                        <input type="search" id="search-dropdown" name="search" value="{{ request()->search }}"
+                                            class="block w-full p-2.5 z-20 text-md text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                                            placeholder="@lang('site.search')" />
+
+                                        <button type="submit"
+                                            class="btn absolute top-0 end-0 p-2.5 text-md font-medium h-full text-white hover:text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                            </svg>
+                                            <span class="sr-only">@lang('site.search')</span>
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                        </div>
 
                     </div>
 
@@ -300,3 +375,21 @@
     </div>
 
 @endsection
+
+@push('scripts')
+    <script>
+
+        function selectCategory(id, name) {
+            document.getElementById('selectedCategory').value = id;
+            document.getElementById('dropdownMenuButton').innerText = name;
+            // إغلاق القائمة
+            // document.querySelector('.dropdown-menu').classList.add('hidden');
+        }
+
+        // فتح/إغلاق القائمة
+        // document.getElementById('dropdownMenuButton').addEventListener('click', function () {
+        //     document.querySelector('.dropdown-menu').classList.toggle('hidden');
+        // });
+
+    </script>
+@endpush

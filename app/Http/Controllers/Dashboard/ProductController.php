@@ -27,10 +27,35 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::withTrashed()->with(['translations', 'prices', 'category'])->latest()->paginate(5);
-        return view('dashboard.products.index', compact('products'));
+        // @dd($request->all);
+        
+        $categories = Category::all();
+
+        $products = Product::withTrashed()
+            ->with(['translations', 'prices', 'category'])
+            ->where(function ($q) use ($request){
+
+                $q->when($request->search, function ($query) use ($request){
+                    // بحث في الاسم والوصف (بناءً على الترجمة)
+                    $query->whereTranslationLike('name', '%' . $request->search . '%')
+                    ->orWhereTranslationLike('description', '%' . $request->search . '%')
+                    // او نبحث عن اسم قسم المنتج
+                    ->orWhereHas('category.translations', function ($q2) use ($request){
+                        $q2->where('name', 'like', '%' . $request->search . '%');
+                    });
+                });
+
+                $q->when($request->filled('category_id'), function ($query) use ($request) {
+                    $query->where('category_id', $request->category_id);
+                });
+
+            })
+            ->latest()->paginate(5);
+
+        return view('dashboard.products.index', compact('categories', 'products'));
+
     }
 
     /**
