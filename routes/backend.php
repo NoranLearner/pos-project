@@ -46,6 +46,7 @@ Route::group(
 
             // Products Routes
             Route::resource('/products', ProductController::class)->names('products');
+            Route::put('products/{id}/sale-price', [ProductController::class, 'change_sale_price'])->name('products.salePrice');
 
         }); // end of dashboard routes
 

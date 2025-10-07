@@ -30,6 +30,14 @@ class Product extends Model implements TranslatableContract
         return $this->hasMany(ProductPrice::class);
     }
 
+    public function currentSalePrice()
+    {
+        return $this->hasOne(ProductPrice::class)
+        ->whereNull('end_date')
+        ->orWhere('end_date', '>=', now())
+        ->latest('start_date');
+    }
+
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');

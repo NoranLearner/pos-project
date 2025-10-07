@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         $this->middleware(['permission:products_read'])->only('index', 'export');
         $this->middleware(['permission:products_create'])->only('create');
-        $this->middleware(['permission:products_update'])->only('edit');
+        $this->middleware(['permission:products_update'])->only('edit', 'change_sale_price');
         $this->middleware(['permission:products_delete'])->only(['destroy', 'restore', 'forceDelete', 'deleteAll']);
     }
 
@@ -28,7 +28,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::withTrashed()->with(['translations', 'prices', 'category'])->latest()->paginate(5);
+        return view('dashboard.products.index', compact('products'));
     }
 
     /**
@@ -112,6 +113,29 @@ class ProductController extends Controller
         //
     }
 
+    public function change_sale_price(Request $request){
+
+        // @dd($request->all());
+
+        $product = Product::find($request->product_id);
+
+        // تقفيل السعر الحالى
+        $product->prices()->where('end_date', null)->update([
+            'end_date' => now()->subDay(),
+        ]);
+
+        // اضافة سعر جديد
+        $product->prices()->create([
+            'purchase_price' => $request->purchase_price,
+            'sale_price' => $request->sale_price,
+            'start_date' => $request->start_date,
+            'end_date' => null,
+        ]);
+
+        Alert::toast(__('site.updated_successfully'), 'success')->timerProgressBar();
+        return redirect()->route('dashboard.products.index');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -119,4 +143,5 @@ class ProductController extends Controller
     {
         //
     }
+
 }

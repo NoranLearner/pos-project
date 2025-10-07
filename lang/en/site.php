@@ -90,9 +90,13 @@ return [
     'product_name' => 'Product Name',
     'product_description' => 'Product Description',
     'product_category' => 'Product Category',
+    'no_category' => 'No Category',
     'select_category' => 'Select Category',
     'purchase_price' => 'Purchase Price',
     'sale_price' => 'Sale Price',
+    'empty_price' => 'Empty Price',
+    'change_sale_price' => 'Change Sale Price',
+    'start_date' => 'Start Date',
     'stock' => 'Stock',
     'product_images' => 'Product Images',
 

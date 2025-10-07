@@ -11,7 +11,7 @@
             <ol class="breadcrumb !static !float-left rtl:!float-right !text-xl">
                 <li>
                     <a href="{{ route('dashboard.products.index') }}">
-                        <i class="fa fa-cart-arrow-down"></i>
+                        <i class="fa fa-cart-plus"></i>
                         @lang('site.products')
                     </a>
                 </li>

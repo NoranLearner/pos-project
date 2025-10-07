@@ -91,8 +91,12 @@ return [
     'product_description' => 'وصف المنتج',
     'product_category' => 'قسم المنتج',
     'select_category' => 'اختر قسم',
+    'no_category' => 'لا يوجد قسم',
     'purchase_price' => 'سعر الشراء',
     'sale_price' => 'سعر البيع',
+    'empty_price' => 'لا يوجد سعر',
+    'change_sale_price' => 'تغيير سعر البيع',
+    'start_date' => 'تاريخ البدء',
     'stock' => 'المخزون',
     'product_images' => 'صور المنتج',
 
