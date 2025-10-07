@@ -229,4 +229,21 @@ class ProductController extends Controller
         return redirect()->route('dashboard.products.index');
     }
 
+    public function forceDelete($id)
+    {
+        $product = Product::withTrashed()->findOrFail($id);
+
+        // Delete old images
+        if ($product->images) {
+            foreach ($product->images as $image) {
+                $this->Delete_attachment('upload_image', 'products/' . $image->file, $product->id);
+            }
+        }
+
+        $product->forceDelete();
+
+        Alert::toast(__('site.deleted_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.products.index');
+    }
+
 }

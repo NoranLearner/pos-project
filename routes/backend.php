@@ -48,6 +48,7 @@ Route::group(
             Route::resource('/products', ProductController::class)->names('products');
             Route::put('products/{id}/sale-price', [ProductController::class, 'change_sale_price'])->name('products.salePrice');
             Route::get('products/{id}/restore', [ProductController::class, 'restore'])->name('products.restore');
+            Route::delete('products/{id}/forceDelete', [ProductController::class, 'forceDelete'])->name('products.forceDelete');
 
         }); // end of dashboard routes
 

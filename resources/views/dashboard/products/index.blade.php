@@ -282,7 +282,7 @@
                                                         data-toggle="modal" data-target="#deleteModal-{{ $product->id }}">
                                                         <i class="fa fa-trash"></i> @lang('site.delete')
                                                     </button>
-                                                    {{-- @include('partials.modal.products.delete', ['product' => $product]) --}}
+                                                    @include('partials.modal.products.delete', ['product' => $product])
 
                                                 @else
                                                     <button class="btn btn-danger opacity-50 cursor-not-allowed hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
