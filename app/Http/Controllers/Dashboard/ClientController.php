@@ -12,12 +12,21 @@ class ClientController extends Controller
 {
     use UploadTrait;
 
+    public function __construct()
+    {
+        $this->middleware('permission:clients_read', ['only' => ['index']]);
+        $this->middleware('permission:clients_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:clients_update', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:clients_delete', ['only' => ['destroy', 'restore', 'forceDelete', 'deleteAll']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $clients = Client::withTrashed()->latest()->paginate(8);
+        return view('dashboard.clients.index', compact('clients'));
     }
 
     /**
@@ -43,6 +52,8 @@ class ClientController extends Controller
             'address' => 'required|string|min:2|max:30',
         ]);
 
+        $validatedData['phones'] = array_filter($validatedData['phones']);
+
         $newClient = Client::create($validatedData);
 
         if ($request->hasFile('image')) {
@@ -67,7 +78,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('dashboard.clients.edit', compact('client'));
     }
 
     /**
@@ -75,7 +86,33 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        // @dd($request->all());
+
+        $validatedData = $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name' => 'required|string|min:2|max:30',
+            'phones' => 'nullable|array|min:1',
+            'phones.*' => 'nullable|string|max:20',
+            'address' => 'nullable|string|min:2|max:30',
+        ]);
+
+        $validatedData['phones'] = array_filter($validatedData['phones']);
+
+        $client->update($validatedData);
+
+        if ($request->hasFile('image')) {
+            // Delete old image
+            if ($client->image) {
+                $old_image = $client->image->file;
+                $this->Delete_attachment('upload_image', 'clients/' . $old_image, $client->id);
+            }
+            // Store new image
+            $this->verifyAndStoreImage($request, 'image', 'clients', 'upload_image', $client->id, Client::class);
+        }
+
+        Alert::toast(__('site.updated_successfully'), 'success')->timerProgressBar();
+
+        return redirect()->route('dashboard.clients.index');
     }
 
     /**

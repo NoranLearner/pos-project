@@ -121,6 +121,7 @@
                                     <tbody>
                                         @foreach ($users as $user)
                                             <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
+
                                                 {{-- For Checkbox --}}
                                                 <td class="w-4 p-4">
                                                     <div class="flex items-center">
@@ -129,6 +130,7 @@
                                                         <label for="delete_select-{{ $user->id }}" class="sr-only">checkbox</label>
                                                     </div>
                                                 </td>
+
                                                 {{-- For User Name And Image --}}
                                                 <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
                                                     @if ($user->image)
@@ -142,10 +144,13 @@
                                                         <div class="text-gray-500 font-semibold">{{ $user->name }}</div>
                                                     </div>
                                                 </th>
+
                                                 {{-- For Email --}}
                                                 <td class="px-6 py-4">
                                                     <div class="font-normal text-gray-500">{{ $user->email }}</div>
                                                 </td>
+
+                                                {{-- For Roles --}}
                                                 <td class="px-6 py-4">
                                                     <div class="flex items-center">
                                                         @if ($user->hasRole(['super_admin', 'admin', 'user']))
@@ -162,6 +167,8 @@
                                                         @endif
                                                     </div>
                                                 </td>
+
+                                                {{-- For Action --}}
                                                 <td class="px-6 py-4">
                                                     {{-- For Edit --}}
                                                     @if (auth()->user()->hasPermission('users_update'))
