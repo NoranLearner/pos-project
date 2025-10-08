@@ -61,6 +61,25 @@
 
                             </div>
 
+                            {{-- Search input --}}
+                            <div class="w-full flex-auto m-4">
+                                <form class="max-w-md mx-auto" action="{{ route('dashboard.clients.index') }}" method="get">
+                                    <label for="default-search" class="mb-2 text-lg font-medium text-gray-900 sr-only">@lang('site.search')</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                            </svg>
+                                        </div>
+                                        <input type="search" id="default-search" name="search" value="{{ request()->search }}" class="block w-full p-3 ps-10 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="@lang('site.search')"/>
+                                        <button type="submit"
+                                            class="btn absolute end-1.5 bottom-1 bg-blue-700 hover:bg-blue-800 text-white hover:text-white text-md font-medium px-4 py-2 rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-300">
+                                            @lang('site.search')
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
                         </div>
 
                     </div>

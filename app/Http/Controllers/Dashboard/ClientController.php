@@ -23,9 +23,15 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clients = Client::withTrashed()->latest()->paginate(8);
+        $clients = Client::withTrashed()->where(function ($q) use ($request) {
+                return $q->when($request->search, function ($query) use ($request) {
+                    return $query->where('name', 'like', '%' . $request->search . '%')
+                        ->orWhere('address', 'like', '%' . $request->search . '%')
+                        ->orWhere('phones', 'like', '%' . $request->search . '%');
+                });
+            })->latest()->paginate(8);
         return view('dashboard.clients.index', compact('clients'));
     }
 
