@@ -149,4 +149,28 @@ class ClientController extends Controller
         Alert::toast(__('site.delete_successfully'), 'warning')->timerProgressBar();
         return redirect()->route('dashboard.clients.index');
     }
+
+    public function deleteAll(Request $request)
+    {
+
+        // @dd($request->delete_select_id);
+
+        $ids = explode(",", $request->delete_select_id);
+
+        foreach ($ids as $category_id) {
+
+            $client = Client::findOrFail($category_id);
+
+            if ($client->image && $client->image->file) {
+                $old_image = $client->image->file;
+                $this->Delete_attachment('upload_image', 'clients/' . $old_image, $client->id);
+            }
+
+            $client->forceDelete();
+        }
+
+        Alert::toast(__('site.delete_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.clients.index');
+
+    }
 }

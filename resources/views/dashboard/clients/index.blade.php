@@ -26,7 +26,44 @@
 
                 <div class="box box-primary">
 
-                    <div class="box-header"></div>
+                    <div class="box-header">
+
+                        <div class="flex items-center">
+
+                            <div class="w-full flex-auto">
+
+                                {{-- Delete All Button --}}
+                                @if (auth()->user()->hasPermission('clients_delete'))
+                                    {{-- Using Modal --}}
+                                    <button type="button" id="deleteAllButton"
+                                        class="btn m-4 btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
+                                        <i class="fa fa-trash"></i> @lang('site.delete_all')
+                                    </button>
+                                    @include('partials.modal.clients.delete_all')
+                                @else
+                                    <button class="btn m-4 btn-danger opacity-50 cursor-not-allowed hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
+                                        <i class="fa fa-trash"></i> @lang('site.delete_all')
+                                    </button>
+                                @endif
+
+                                {{-- Add User Button --}}
+                                @if (auth()->user()->hasPermission('clients_create'))
+                                    <a href="{{ route('dashboard.clients.create') }}"
+                                        class="btn m-4 bg-green-500 hover:bg-green-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-green-300">
+                                        <i class="fa fa-plus"></i> @lang('site.client_add')
+                                    </a>
+                                @else
+                                    <a href="#"
+                                        class="btn m-4 bg-green-500 opacity-50 cursor-not-allowed text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-green-300">
+                                        <i class="fa fa-plus"></i> @lang('site.client_add')
+                                    </a>
+                                @endif
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                     <div class="box-body">
 

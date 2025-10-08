@@ -57,6 +57,7 @@ Route::group(
             Route::resource('/clients', ClientController::class)->names('clients');
             Route::get('clients/{id}/restore', [ClientController::class, 'restore'])->name('clients.restore');
             Route::delete('clients/{id}/forceDelete', [ClientController::class, 'forceDelete'])->name('clients.forceDelete');
+            Route::delete('clients-delete-all', [ClientController::class, 'deleteAll'])->name('clients.deleteAll');
 
         }); // end of dashboard routes
 
