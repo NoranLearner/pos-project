@@ -134,4 +134,19 @@ class ClientController extends Controller
         Alert::toast(__('site.change_status_successfully'), 'warning')->timerProgressBar();
         return redirect()->route('dashboard.clients.index');
     }
+
+    public function forceDelete($id){
+
+        $client = Client::withTrashed()->findOrFail($id);
+
+        if ($client->image && $client->image->file) {
+            $old_image = $client->image->file;
+            $this->Delete_attachment('upload_image', 'clients/' . $old_image, $client->id);
+        }
+
+        $client->forceDelete();
+
+        Alert::toast(__('site.delete_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.clients.index');
+    }
 }
