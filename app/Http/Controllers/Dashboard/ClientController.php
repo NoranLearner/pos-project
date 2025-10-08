@@ -120,6 +120,18 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+
+        Alert::toast(__('site.change_status_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.clients.index');
+    }
+
+    public function restore($id)
+    {
+        $client = Client::withTrashed()->findOrFail($id);
+        $client->restore();
+
+        Alert::toast(__('site.change_status_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.clients.index');
     }
 }
