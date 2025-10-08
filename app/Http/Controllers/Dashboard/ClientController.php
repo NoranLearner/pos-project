@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Traits\UploadTrait;
 
 class ClientController extends Controller
 {
+    use UploadTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -21,7 +25,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.clients.create');
     }
 
     /**
@@ -29,7 +33,25 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // @dd($request->all());
+
+        $validatedData = $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name' => 'required|string|min:2|max:30',
+            'phones' => 'required|array|min:1',
+            'phones.*' => 'string|max:20',
+            'address' => 'required|string|min:2|max:30',
+        ]);
+
+        $newClient = Client::create($validatedData);
+
+        if ($request->hasFile('image')) {
+            $this->verifyAndStoreImage($request, 'image', 'clients', 'upload_image', $newClient->id, Client::class);
+        }
+
+        Alert::toast(__('site.added_successfully'), 'success')->timerProgressBar();
+
+        return redirect()->route('dashboard.clients.index');
     }
 
     /**

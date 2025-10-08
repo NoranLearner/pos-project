@@ -10,7 +10,11 @@ class Client extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name', 'phone', 'address'];
+    protected $fillable = ['name', 'phones', 'address'];
+
+    protected $casts = [
+        'phones' => 'array',
+    ];
 
     public function image()
     {
