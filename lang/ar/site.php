@@ -108,8 +108,8 @@ return [
     'client_edit' => 'تعديل عميل',
     'client_delete' => 'حذف عميل',
     'client_name' => 'اسم العميل',
-    'client_phone' => 'رقم الهاتف',
-    'client_address' => 'العنوان',
+    'phone' => 'رقم الهاتف',
+    'current_address' => 'العنوان الحالي',
 
     // orders
     'orders' => 'الطلبات',

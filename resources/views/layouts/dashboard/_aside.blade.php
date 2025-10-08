@@ -110,6 +110,34 @@
                 </a>
             </li>
 
+            {{-- For Clients --}}
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    <span>@lang('site.clients')</span>
+                    <ul class="treeview-menu">
+                        {{-- Clients --}}
+                        @if (auth()->user()->hasPermission('clients_read'))
+                            <li>
+                                <a href="{{ route('dashboard.clients.index') }}">
+                                    <i class="fa fa-users"></i>
+                                    <span>@lang('site.clients')</span>
+                                </a>
+                            </li>
+                        @endif
+                        {{-- Add Client --}}
+                        @if (auth()->user()->hasPermission('clients_create'))
+                            <li>
+                                <a href="{{ route('dashboard.clients.create') }}">
+                                    <i class="fa fa-user-plus"></i>
+                                    <span>@lang('site.client_add')</span>
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                </a>
+            </li>
+
             {{-- @if (auth()->user()->hasPermission('read_categories'))
             <li><a href="{{ route('dashboard.categories.index') }}"><i
                         class="fa fa-th"></i><span>@lang('site.categories')</span></a></li>

@@ -108,8 +108,8 @@ return [
     'client_edit' => 'Edit Client',
     'client_delete' => 'Delete Client',
     'client_name' => 'Client Name',
-    'client_phone' => 'Client Phone',
-    'client_address' => 'Client Address',
+    'phone' => 'Phone',
+    'current_address' => 'Current Address',
 
     // orders
     'orders' => 'Orders',

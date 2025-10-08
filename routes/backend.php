@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\ClientController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -51,6 +52,9 @@ Route::group(
             Route::delete('products/{id}/forceDelete', [ProductController::class, 'forceDelete'])->name('products.forceDelete');
             Route::delete('products-delete-all', [ProductController::class, 'deleteAll'])->name('products.deleteAll');
             Route::get('products-export', [ProductController::class, 'export'])->name('products.export');
+
+            // Clients Routes
+            Route::resource('/clients', ClientController::class)->names('clients');
 
         }); // end of dashboard routes
 
