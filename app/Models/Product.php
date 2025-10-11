@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Image;
+use App\Models\Order;
 use App\Models\Category;
 use App\Models\ProductPrice;
-use App\Models\Image;
-use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
 class Product extends Model implements TranslatableContract
 {
@@ -61,6 +62,12 @@ class Product extends Model implements TranslatableContract
     public function imagesCount()
     {
         return $this->morphMany(Image::class, 'imageable')->count();
+    }
+
+    // order has many products
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'product_order_pivot');
     }
 
 }

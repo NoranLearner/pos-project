@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Image;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -27,5 +28,11 @@ class Client extends Model
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    // client has many orders
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }
