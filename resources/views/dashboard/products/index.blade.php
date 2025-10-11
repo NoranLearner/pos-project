@@ -259,7 +259,9 @@
                                             {{-- For Purchase Price --}}
                                             <td class="px-6 py-4">
                                                 <div class="font-medium text-gray-500">
-                                                    {{ number_format($product->prices->last()->purchase_price) ?? __('site.empty_price') }}
+                                                    {{-- {{ number_format($product->prices->last()->purchase_price) ?? __('site.empty_price') }} --}}
+                                                    {{-- {{ number_format($product->currentSalePrice?->sale_price ?? 0, 2) }} --}}
+                                                    {{ number_format($product->prices->last()->purchase_price ?? __('site.empty_price'), 2) }}
                                                 </div>
                                             </td>
 
@@ -268,12 +270,14 @@
                                                 <div class="font-medium text-gray-500">
                                                     @if (auth()->user()->hasPermission('products_update'))
                                                         <button class="btn btn-link hover:no-underline focus:no-underline" data-toggle="modal" data-target="#editSalePriceModal{{ $product->id }}">
-                                                            {{ number_format($product->currentSalePrice?->sale_price) ?? __('site.empty_price') }}
+                                                            {{-- {{ number_format($product->currentSalePrice?->sale_price) ?? __('site.empty_price') }} --}}
+                                                            {{ number_format($product->currentSalePrice?->sale_price ?? __('site.empty_price'), 2) }}
                                                             <i class="fa fa-edit m-3"></i>
                                                         </button>
                                                         @include('partials.modal.products.edit_sale_price', ['product' => $product])
                                                     @else
-                                                        {{ number_format($product->currentSalePrice?->sale_price) ?? __('site.empty_price') }}
+                                                        {{-- {{ number_format($product->currentSalePrice?->sale_price) ?? __('site.empty_price') }} --}}
+                                                        {{ number_format($product->currentSalePrice?->sale_price ?? __('site.empty_price'), 2) }}
                                                     @endif
                                                 </div>
                                             </td>

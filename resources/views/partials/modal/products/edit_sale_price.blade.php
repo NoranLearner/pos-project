@@ -35,8 +35,8 @@
 
                     <div class="mb-5">
                         <label for="purchase_price" class="block mb-4 text-lg font-medium text-gray-900">@lang('site.purchase_price')</label>
-                        <input type="text" id="purchase_price" aria-label="disabled input" class="form-control bg-gray-100 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 cursor-not-allowed" value="{{ number_format($product->prices->first()?->purchase_price) ?? __('site.empty_price') }}" disabled readonly>
-                        <input type="hidden" id="purchase_price" name="purchase_price" value='{{ $product->prices->first()?->purchase_price ?? '' }}'>
+                        <input type="text" id="purchase_price" aria-label="disabled input" class="form-control bg-gray-100 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 cursor-not-allowed" value="{{ number_format($product->prices->last()->purchase_price ?? '', 2) }}" disabled readonly>
+                        <input type="hidden" id="purchase_price" name="purchase_price" value='{{ number_format($product->prices->last()->purchase_price ?? '', 2) }}'>
                     </div>
 
                     <div class="mb-5">

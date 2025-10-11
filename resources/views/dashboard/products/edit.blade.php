@@ -102,8 +102,8 @@
                             <div class="relative z-0 w-full mb-5 group">
                                 <label for="purchase_price"
                                     class="block mb-4 text-xl font-medium text-gray-900">{{ __('site.purchase_price') }}</label>
-                                <input type="number" id="purchase_price" name="purchase_price"
-                                    value="{{ number_format($product->prices->last()->purchase_price) }}"
+                                <input type="number" step="0.01" id="purchase_price" name="purchase_price"
+                                    value="{{ number_format($product->prices->last()->purchase_price, 2) }}"
                                     class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     placeholder=""/>
                                 @error('purchase_price')
@@ -115,8 +115,8 @@
                             <div class="relative z-0 w-full mb-5 group">
                                 <label for="sale_price"
                                     class="block mb-4 text-xl font-medium text-gray-900">{{ __('site.sale_price') }}</label>
-                                <input type="number" id="sale_price" name="sale_price"
-                                    value="{{ number_format($product->currentSalePrice?->sale_price) }}"
+                                <input type="number" step="0.01" id="sale_price" name="sale_price"
+                                    value="{{ number_format($product->currentSalePrice?->sale_price, 2) }}"
                                     class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     placeholder="" />
                                 @error('sale_price')
