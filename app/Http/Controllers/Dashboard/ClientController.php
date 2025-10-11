@@ -48,7 +48,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        // @dd($request->all());
+        // dd($request->all());
 
         $validatedData = $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -92,7 +92,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        // @dd($request->all());
+        // dd($request->all());
 
         $validatedData = $request->validate([
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -159,7 +159,7 @@ class ClientController extends Controller
     public function deleteAll(Request $request)
     {
 
-        // @dd($request->delete_select_id);
+        // dd($request->delete_select_id);
 
         $ids = explode(",", $request->delete_select_id);
 

@@ -29,8 +29,8 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        // @dd($request->all);
-        
+        // dd($request->all);
+
         $categories = Category::all();
 
         $products = Product::withTrashed()
@@ -72,7 +72,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // @dd($request->all());
+        // dd($request->all());
 
         $locales = LaravelLocalization::getSupportedLocales();
 
@@ -207,7 +207,7 @@ class ProductController extends Controller
 
     public function change_sale_price(Request $request){
 
-        // @dd($request->all());
+        // dd($request->all());
 
         $product = Product::find($request->product_id);
 
@@ -275,7 +275,7 @@ class ProductController extends Controller
     public function deleteAll(Request $request)
     {
 
-        // @dd($request->delete_select_id);
+        // dd($request->delete_select_id);
 
         $ids = explode(",", $request->delete_select_id);
 

@@ -342,6 +342,7 @@
     {{-- <script src="{{ asset('dashboard_files/plugins/ckeditor/ckeditor.js') }}"></script> --}}
 
     {{--jquery number--}}
+    {{-- https://github.com/customd/jquery-number --}}
     <script src="{{ asset('dashboard_files/js/jquery.number.min.js') }}"></script>
 
     {{--print this--}}

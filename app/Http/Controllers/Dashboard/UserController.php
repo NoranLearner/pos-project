@@ -70,7 +70,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // @dd($request->all());
+        // dd($request->all());
 
         $validatedData = $request->validate([
             'name' => 'required|string|min:2|max:30',
@@ -181,7 +181,7 @@ class UserController extends Controller
     public function deleteAll(Request $request)
     {
 
-        // @dd($request->delete_select_id);
+        // dd($request->delete_select_id);
 
         $ids = explode(",", $request->delete_select_id);
 
