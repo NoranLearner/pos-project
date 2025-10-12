@@ -223,6 +223,18 @@
                                                         </button>
                                                     @endif
 
+                                                    {{-- For Add Order --}}
+                                                    @if (auth()->user()->hasPermission('orders_create'))
+                                                        <a href="{{ route('dashboard.clients.orders.create', $client->id) }}"
+                                                            class="btn bg-white hover:bg-gray-100 text-gray-600 hover:text-gray-600 font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-gray-100 border border-gray-300">
+                                                            <i class="fa fa-shopping-basket"></i> @lang('site.order_add')
+                                                        </a>
+                                                    @else
+                                                        <a href="#" class="btn opacity-50 cursor-not-allowed bg-white hover:bg-gray-100 text-gray-600 hover:text-gray-600 font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-gray-100 border border-gray-300">
+                                                            <i class="fa fa-shopping-basket"></i> @lang('site.order_add')
+                                                        </a>
+                                                    @endif
+
                                                 </td>
 
                                             </tr>

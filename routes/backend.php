@@ -8,6 +8,8 @@ use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\Dashboard\Client\OrderController as ClientOrderController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -58,6 +60,7 @@ Route::group(
             Route::get('clients/{id}/restore', [ClientController::class, 'restore'])->name('clients.restore');
             Route::delete('clients/{id}/forceDelete', [ClientController::class, 'forceDelete'])->name('clients.forceDelete');
             Route::delete('clients-delete-all', [ClientController::class, 'deleteAll'])->name('clients.deleteAll');
+            Route::resource('clients.orders', ClientOrderController::class);
 
         }); // end of dashboard routes
 
