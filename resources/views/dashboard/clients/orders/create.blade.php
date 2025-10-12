@@ -97,7 +97,12 @@
                                                                 <td class="px-6 py-4">
                                                                     <div class="font-normal text-gray-500">
                                                                         <a href=""
-                                                                            class="btn m-4 bg-green-500 hover:bg-green-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-green-300">
+                                                                            id="product-{{ $product->id }}"
+                                                                            data-id="{{ $product->id }}"
+                                                                            data-name="{{ $product->name }}"
+                                                                            data-price="{{ $product->currentSalePrice->sale_price }}"
+                                                                            data-translation="{{ __('site.delete') }}"
+                                                                            class="btn addProductButton m-4 bg-green-500 hover:bg-green-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-green-300">
                                                                             <i class="fa fa-plus"></i> @lang('site.add')
                                                                         </a>
                                                                     </div>
@@ -134,77 +139,87 @@
 
                 <div class="box-body">
 
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    @include('partials._errors')
 
-                        <table class="my-table w-full text-xl text-left rtl:text-right text-gray-500" id="">
+                    <form action="{{ route('dashboard.clients.orders.store', $client->id) }}" method="post">
+                        @csrf
 
-                            <thead class="text-lg text-gray-700 uppercase bg-gray-50">
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-                                <tr>
+                            <table class="my-table w-full text-xl text-left rtl:text-right text-gray-500" id="">
 
-                                    <th scope="col" class="px-6 py-3">
-                                        @lang('site.product_name')
-                                    </th>
+                                <thead class="text-lg text-gray-700 uppercase bg-gray-50">
 
-                                    <th scope="col" class="px-6 py-3">
-                                        @lang('site.quantity')
-                                    </th>
+                                    <tr>
 
-                                    <th scope="col" class="px-6 py-3">
-                                        @lang('site.price')
-                                    </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            @lang('site.product_name')
+                                        </th>
 
-                                    <th scope="col" class="px-6 py-3">
-                                        @lang('site.action')
-                                    </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            @lang('site.quantity')
+                                        </th>
 
-                                </tr>
+                                        <th scope="col" class="px-6 py-3">
+                                            @lang('site.price')
+                                        </th>
 
-                            </thead>
+                                        <th scope="col" class="px-6 py-3">
+                                            @lang('site.action')
+                                        </th>
 
-                            <tbody>
+                                    </tr>
 
-                                {{-- Appear With Javascript Code --}}
-                                {{-- <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
+                                </thead>
 
-                                    <th scope="col" class="px-6 py-3">
-                                        بيتزا
-                                    </th>
+                                <tbody class="orderList">
 
-                                    <th scope="col" class="px-6 py-3">
-                                        {{-- https://flowbite.com/docs/components/tables/ --}
-                                        <input type="number" name="quantity" class="w-28 bg-gray-50 border border-gray-300 text-gray-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block py-2 px-4" placeholder="1" required />
-                                    </th>
+                                    {{-- Appear With Javascript Code --}}
+                                    {{-- <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
 
-                                    <th scope="col" class="px-6 py-3">
-                                        100
-                                    </th>
+                                        <td class="px-6 py-4">
+                                            <div class="font-normal text-gray-500">
+                                                بيتزا
+                                            </div>
+                                        </td>
 
-                                    <th scope="col" class="px-6 py-3">
-                                        <button type="button" class="btn m-4 btn-danger hover:bg-red-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
-                                            <i class="fa fa-trash"></i> @lang('site.delete')
-                                        </button>
-                                    </th>
+                                        <td class="px-6 py-4">
+                                            {{-- https://flowbite.com/docs/components/tables/ --}
+                                            <input type="number" name="quantity" class="w-28 bg-gray-50 border border-gray-300 text-gray-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block py-2 px-4" placeholder="1" required />
+                                        </td>
 
-                                </tr> --}}
+                                        <td class="px-6 py-4">
+                                            100
+                                        </td>
 
-                            </tbody>
+                                        <td class="px-6 py-4">
+                                            <button type="button" class="btn m-4 btn-danger hover:bg-red-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
+                                                <i class="fa fa-trash"></i> @lang('site.delete')
+                                            </button>
+                                        </td>
 
-                        </table>
+                                    </tr> --}}
 
-                    </div>
+                                </tbody>
 
-                    <div class="flex justify-evenly text-gray-500 text-2xl font-semibold my-8">
-                        <span>@lang('site.order_total')</span>
-                        <span>-- --</span>
-                    </div>
+                            </table>
 
-                    <div class="flex justify-center">
-                        <a href=""
-                            class="w-full btn m-4 bg-green-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-green-300">
-                            <i class="fa fa-plus"></i> @lang('site.order_add')
-                        </a>
-                    </div>
+                        </div>
+
+                        <div class="flex justify-evenly text-gray-500 text-2xl font-semibold my-8">
+                            <span>@lang('site.order_total')</span>
+                            <span class="orderTotalPrice">-- --</span>
+                        </div>
+
+                        <div class="flex justify-center">
+                            <button
+                                id="addOrder"
+                                class="w-full btn m-4 bg-green-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-green-300 disabled">
+                                <i class="fa fa-plus"></i> @lang('site.order_add')
+                            </button>
+                        </div>
+
+                    </form>
 
                 </div>
 

@@ -361,10 +361,10 @@
 
     {{--custom js--}}
     <script src="{{ asset('dashboard_files/js/custom/image_preview.js') }}"></script>
-    <script src="{{ asset('dashboard_files/js/custom/order.js') }}"></script>
-
     {{-- For Delete All --}}
     <script src="{{ asset('dashboard_files/js/custom/delete_all.js') }}"></script>
+    {{-- For Orders --}}
+    <script src="{{ asset('dashboard_files/js/custom/order.js') }}"></script>
 
     {{-- For Data Table --}}
     {{-- <script src="https://cdn.datatables.net/v/bs/jszip-3.10.1/dt-2.3.4/b-3.2.5/b-html5-3.2.5/b-print-3.2.5/datatables.min.js" integrity="sha384-IEtxkDm+KXERTtDz8EHbs07Sv0r31HyNom4p+ttbsrVtleKUaliHVljXBEmSswhZ" crossorigin="anonymous"></script> --}}
