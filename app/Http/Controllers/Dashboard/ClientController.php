@@ -26,12 +26,12 @@ class ClientController extends Controller
     public function index(Request $request)
     {
         $clients = Client::withTrashed()->where(function ($q) use ($request) {
-                return $q->when($request->search, function ($query) use ($request) {
-                    return $query->where('name', 'like', '%' . $request->search . '%')
-                        ->orWhere('address', 'like', '%' . $request->search . '%')
-                        ->orWhere('phones', 'like', '%' . $request->search . '%');
-                });
-            })->latest()->paginate(8);
+            return $q->when($request->search, function ($query) use ($request) {
+                return $query->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('address', 'like', '%' . $request->search . '%')
+                    ->orWhere('phones', 'like', '%' . $request->search . '%');
+            });
+        })->latest()->paginate(8);
         return view('dashboard.clients.index', compact('clients'));
     }
 
@@ -55,7 +55,7 @@ class ClientController extends Controller
             'name' => 'required|string|min:2|max:30',
             'phones' => 'required|array|min:1',
             'phones.*' => 'string|max:20',
-            'address' => 'required|string|min:2|max:30',
+            'address' => 'required|string|min:2|max:50',
         ]);
 
         $validatedData['phones'] = array_filter($validatedData['phones']);
@@ -99,7 +99,7 @@ class ClientController extends Controller
             'name' => 'required|string|min:2|max:30',
             'phones' => 'nullable|array|min:1',
             'phones.*' => 'nullable|string|max:20',
-            'address' => 'nullable|string|min:2|max:30',
+            'address' => 'nullable|string|min:2|max:50',
         ]);
 
         $validatedData['phones'] = array_filter($validatedData['phones']);
@@ -141,7 +141,8 @@ class ClientController extends Controller
         return redirect()->route('dashboard.clients.index');
     }
 
-    public function forceDelete($id){
+    public function forceDelete($id)
+    {
 
         $client = Client::withTrashed()->findOrFail($id);
 
