@@ -85,6 +85,7 @@ return [
 
     // Products
     'products' => 'Products',
+    'product' => 'Product',
     'product_add' => 'Add Product',
     'product_edit' => 'Edit Product',
     'product_delete' => 'Delete Product',
@@ -96,6 +97,7 @@ return [
     'purchase_price' => 'Purchase Price',
     'sale_price' => 'Sale Price',
     'empty_price' => 'Empty Price',
+    'price' => 'Price',
     'change_sale_price' => 'Change Sale Price',
     'start_date' => 'Start Date',
     'stock' => 'Stock',
@@ -119,6 +121,7 @@ return [
     'order_client' => 'Order Client',
     'order_product' => 'Order Product',
     'order_quantity' => 'Order Quantity',
+    'quantity' => 'Quantity',
     'order_price' => 'Order Price',
     'order_total' => 'Order Total',
 

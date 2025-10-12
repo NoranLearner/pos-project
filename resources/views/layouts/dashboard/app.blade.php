@@ -131,6 +131,8 @@
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
 
+    @stack('styles')
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -343,7 +345,7 @@
 
     {{--jquery number--}}
     {{-- https://github.com/customd/jquery-number --}}
-    <script src="{{ asset('dashboard_files/js/jquery.number.min.js') }}"></script>
+    {{-- <script src="{{ asset('dashboard_files/js/jquery.number.min.js') }}"></script> --}}
 
     {{--print this--}}
     {{-- <script src="{{ asset('dashboard_files/js/printThis.js') }}"></script> --}}
@@ -424,7 +426,9 @@
         // });//end of ready
 
     </script>
+
     @stack('scripts')
+
 </body>
 
 </html>

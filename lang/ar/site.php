@@ -85,6 +85,7 @@ return [
 
     // Products
     'products' => 'المنتجات',
+    'product' => 'المنتج',
     'product_add' => 'اضافة منتج',
     'product_edit' => 'تعديل منتج',
     'product_delete' => 'حذف منتج',
@@ -96,6 +97,7 @@ return [
     'purchase_price' => 'سعر الشراء',
     'sale_price' => 'سعر البيع',
     'empty_price' => 'لا يوجد سعر',
+    'price' => 'السعر',
     'change_sale_price' => 'تغيير سعر البيع',
     'start_date' => 'تاريخ البدء',
     'stock' => 'المخزون',
@@ -119,6 +121,7 @@ return [
     'order_client' => 'طلب العميل',
     'order_product' => 'طلب المنتج',
     'order_quantity' => 'كمية الطلب',
+    'quantity' => 'الكمية',
     'order_price' => 'سعر الطلب',
     'order_total' => 'المجموع',
 
