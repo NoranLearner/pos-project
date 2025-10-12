@@ -214,7 +214,7 @@
                         <div class="flex justify-center">
                             <button
                                 id="addOrder"
-                                class="w-full btn m-4 bg-green-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-green-300 disabled">
+                                class="w-full btn m-4 bg-green-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-green-300 disabled" disabled>
                                 <i class="fa fa-plus"></i> @lang('site.order_add')
                             </button>
                         </div>

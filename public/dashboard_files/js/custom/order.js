@@ -73,11 +73,13 @@ function calculateTotal() {
     if (price > 0) {
 
         $('#addOrder').removeClass('disabled');
+        $('#addOrder').prop('disabled', false);;
         // console.log('price is greater than 0');
 
     } else {
 
         $('#addOrder').addClass('disabled');
+        $('#addOrder').prop('disabled', true);
         // console.log('price is 0');
     }
 
