@@ -3,12 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\OrderController;
+use App\Http\Controllers\Dashboard\Client\OrderController as ClientOrderController;
 use App\Http\Controllers\Dashboard\ClientController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use App\Http\Controllers\Dashboard\Client\OrderController as ClientOrderController;
 
 
 Route::get('/', function () {
@@ -61,6 +62,9 @@ Route::group(
             Route::delete('clients/{id}/forceDelete', [ClientController::class, 'forceDelete'])->name('clients.forceDelete');
             Route::delete('clients-delete-all', [ClientController::class, 'deleteAll'])->name('clients.deleteAll');
             Route::resource('clients.orders', ClientOrderController::class);
+
+            // Orders Routes
+            Route::resource('/orders', OrderController::class)->names('orders');
 
         }); // end of dashboard routes
 

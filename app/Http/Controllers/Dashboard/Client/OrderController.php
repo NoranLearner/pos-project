@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Dashboard\Client;
 
 use App\Models\Client;
+use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class OrderController extends Controller
 {
@@ -29,9 +31,45 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Client $client)
     {
-        dd($request->all());
+        // dd($request->all());
+        // dd($client);
+
+        $validatedData =  $request->validate([
+            'products' => 'required|array|min:1',
+            'products.*.quantity' => 'required|numeric|min:1',
+            'products.*.id' => 'exists:products,id',
+        ]);
+
+        // dd($validatedData);
+
+        $order = $client->orders()->create([
+            'client_id' => $client->id,
+            // 'total_price' => $request->total_price,
+            // 'status' => 'pending',
+        ]);
+
+        $order->products()->attach($request->products);
+
+        $total_price = 0;
+
+        foreach ($request->products as $id=>$quantity) {
+            // dd($quantity); // array("quantity" => "1")
+            $product = Product::findOrFail($id);
+            $total_price += $quantity['quantity'] * $product->currentSalePrice->sale_price;
+            $product->update([
+                'stock' => $product->stock - $quantity['quantity'],
+            ]);
+        }
+
+        $order->update([
+            'total_price' => $total_price,
+        ]);
+
+        Alert::toast(__('site.order_added_successfully'), 'success')->timerProgressBar();
+
+        return redirect()->route('dashboard.orders.index');
     }
 
     /**

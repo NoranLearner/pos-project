@@ -124,5 +124,11 @@ return [
     'quantity' => 'Quantity',
     'order_price' => 'Order Price',
     'order_total' => 'Order Total',
+    'order_status' => 'Order Status',
+    'order_pending' => 'Pending',
+    'order_completed' => 'Completed',
+    'order_cancelled' => 'Cancelled',
+    'order_details' => 'Order Details',
+    'order_added_successfully' => 'Order Added Successfully',
 
 ];

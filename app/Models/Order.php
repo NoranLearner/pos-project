@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = [ 'client_id', 'total_price' ];
+    protected $fillable = [ 'client_id', 'total_price', 'status' ];
 
     // client has many orders
     public function client()
