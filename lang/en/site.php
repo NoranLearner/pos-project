@@ -123,6 +123,7 @@ return [
     'order_quantity' => 'Order Quantity',
     'quantity' => 'Quantity',
     'order_price' => 'Order Price',
+    'currency' => 'Egyptian Pound',
     'order_total' => 'Order Total',
     'order_status' => 'Order Status',
     'order_pending' => 'Pending',

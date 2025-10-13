@@ -123,6 +123,7 @@ return [
     'order_quantity' => 'كمية الطلب',
     'quantity' => 'الكمية',
     'order_price' => 'سعر الطلب',
+    'currency' => 'جنيه',
     'order_total' => 'المجموع',
     'order_status' => 'حالة الطلب',
     'order_pending' => 'قيد الانتظار',
@@ -130,5 +131,4 @@ return [
     'order_cancelled' => 'ملغي',
     'order_details' => 'تفاصيل الطلب',
     'order_added_successfully' => 'تم اضافة الطلب بنجاح',
-
 ];
