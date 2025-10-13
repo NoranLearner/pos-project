@@ -29,7 +29,48 @@
             <div class="box box-primary flex-1 basis-2/3 p-4">
 
                 <div class="box-header">
+
                     <h2 class="my-5 font-semibold !text-gray-700 text-2xl">@lang('site.orders')</h2>
+
+                    <div class="flex items-center">
+
+                        {{-- Delete All --}}
+                        <div class="w-full flex-auto">
+                            {{-- Delete All Button --}}
+                            @if (auth()->user()->hasPermission('orders_delete'))
+                                {{-- Using Modal --}}
+                                <button type="button" id="deleteAllButton"
+                                    class="btn mx-4 btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
+                                    <i class="fa fa-trash"></i> @lang('site.delete_all')
+                                </button>
+                                {{-- @include('partials.modal.clients.delete_all') --}}
+                            @else
+                                <button class="btn m-4 btn-danger opacity-50 cursor-not-allowed hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
+                                    <i class="fa fa-trash"></i> @lang('site.delete_all')
+                                </button>
+                            @endif
+                        </div>
+
+                        {{-- Search Input --}}
+                        <div class="w-full flex-auto">
+                            <form class="max-w-md mx-auto" action="{{ route('dashboard.orders.index') }}" method="get">
+                                <label for="default-search" class="mb-2 text-lg font-medium text-gray-900 sr-only">@lang('site.search')</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                        </svg>
+                                    </div>
+                                    <input type="search" id="default-search" name="search" value="{{ request()->search }}" class="block w-full p-3 ps-10 text-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="@lang('site.search')"/>
+                                    <button type="submit"
+                                        class="btn absolute end-1.5 bottom-1 bg-blue-700 hover:bg-blue-800 text-white hover:text-white text-md font-medium px-4 py-2 rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-300">
+                                        @lang('site.search')
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
                 </div>
 
                 <div class="box-body">
@@ -120,15 +161,15 @@
 
                                                     @if ($order->status == 'pending')
 
-                                                        <span class="text-yellow-500">@lang('site.order_pending')</span>
+                                                        <span class="text-yellow-500">@lang('site.pending')</span>
 
-                                                    @elseif ( $order->status == 'canceled' || $order->status == 'rejected' )
+                                                    @elseif ( $order->status == 'canceled' )
 
-                                                        <span class="text-red-500">@lang('site.order_cancelled')</span>
+                                                        <span class="text-red-500">@lang('site.cancelled')</span>
 
                                                     @elseif ( $order->status == 'completed' )
 
-                                                        <span class="text-green-500">@lang('site.order_completed')</span>
+                                                        <span class="text-green-500">@lang('site.completed')</span>
 
                                                     @endif
                                                 </div>

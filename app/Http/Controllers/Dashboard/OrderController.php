@@ -19,9 +19,34 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::latest()->paginate(5);
+
+        // نجيب الترجمات العكسية
+        $statusTranslations = [
+            __('site.pending') => 'pending',
+            __('site.completed') => 'completed',
+            __('site.cancelled') => 'cancelled',
+        ];
+
+        $orders = Order::where(function ($q) use ($request, $statusTranslations) {
+
+            $q->when($request->search, function ($query) use ($request, $statusTranslations) {
+
+                // البحث في اسم العميل
+                $query->whereHas('client', function ($q1) use ($request) {
+                    $q1->where('name', 'like', '%' . $request->search . '%');
+                });
+
+                // لو المستخدم كتب ترجمة الحالة بالعربي أو الإنجليزي
+                $statusKey = $statusTranslations[$request->input('search')] ?? null;
+
+                if ($statusKey) {
+                    $query->orWhere('status', $statusKey);
+                }
+            });
+
+        })->latest()->paginate(5);
         return view('dashboard.orders.index', compact('orders'));
     }
 

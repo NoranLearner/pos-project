@@ -126,9 +126,9 @@ return [
     'currency' => 'جنيه',
     'order_total' => 'المجموع',
     'order_status' => 'حالة الطلب',
-    'order_pending' => 'قيد الانتظار',
-    'order_completed' => 'مكتمل',
-    'order_cancelled' => 'ملغي',
+    'pending' => 'قيد الانتظار',
+    'completed' => 'مكتمل',
+    'cancelled' => 'ملغي',
     'order_details' => 'تفاصيل الطلب',
     'order_added_successfully' => 'تم اضافة الطلب بنجاح',
 ];
