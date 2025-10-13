@@ -16,7 +16,10 @@
 
             <div class="clearfix"></div>
 
-            <h1 class="!my-5">@lang('site.order_add')</h1>
+            <h1 class="!my-5">
+                @lang('site.order_add')
+                <span class="text-gray-500 text-2xl">( @lang('site.client_name') : {{ $client->name }} )</span>
+            </h1>
 
         </section>
 
