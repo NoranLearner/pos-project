@@ -185,9 +185,10 @@
 
                                                 {{-- For Show Order Details --}}
                                                 @if (auth()->user()->hasPermission('orders_read'))
-                                                    {{-- data-url="{{ route('dashboard.orders.products', $order->id) }}" --}}
                                                     <button type="button"
-                                                        class="btn bg-sky-500 hover:bg-sky-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-300">
+                                                        data-url="{{ route('dashboard.orders.show', $order->id) }}"
+                                                        data-method="get"
+                                                        class="orderProducts btn bg-sky-500 hover:bg-sky-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-sky-300">
                                                         <i class="fa fa-eye"></i> @lang('site.view')
                                                     </button>
                                                 @else
@@ -257,7 +258,10 @@
                     <h2 class="my-5 font-semibold !text-gray-700 text-2xl">@lang('site.order_details')</h2>
                 </div>
 
-                <div class="box-body"></div>
+                <div class="box-body">
+                    {{-- @include('dashboard.orders.order_details') --}}
+                    <div id="myOrderDetails"></div>
+                </div>
 
             </div>
 

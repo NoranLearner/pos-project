@@ -71,7 +71,11 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        // $products = $order->products()->withPivot('quantity')->get();
+        // return $products[0]->pivot->quantity;
+        // return $products;
+        $order ->load('client', 'products');
+        return view('dashboard.orders.order_details', compact('order'));
     }
 
     /**

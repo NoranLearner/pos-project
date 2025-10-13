@@ -131,4 +131,5 @@ return [
     'cancelled' => 'ملغي',
     'order_details' => 'تفاصيل الطلب',
     'order_added_successfully' => 'تم اضافة الطلب بنجاح',
+    'print' => 'طباعة',
 ];

@@ -53,6 +53,31 @@ $(document).ready(function () {
 
     });
 
+    $(document).on('click', '.orderProducts', function (e) {
+
+        e.preventDefault();
+
+        var url = $(this).data('url');
+        var method = $(this).data('method');
+
+        // alert(url); // http://127.0.0.1:8000/ar/dashboard/orders/1
+
+        $.ajax({
+            url: url,
+            method: method,
+            success: function (data) {
+                // alert(data);
+                // $('.orderDetailsList').append(data);
+                // $('.orderDetailsList').html(data);
+                $('#myOrderDetails').html(data).hide().fadeIn(300);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+    });
+
 });
 
 function calculateTotal() {

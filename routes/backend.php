@@ -65,6 +65,7 @@ Route::group(
 
             // Orders Routes
             Route::resource('/orders', OrderController::class)->names('orders');
+            // Route::get('orders/{id}/products', [OrderController::class, 'products'])->name('orders.products');
 
         }); // end of dashboard routes
 

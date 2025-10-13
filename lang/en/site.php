@@ -131,5 +131,6 @@ return [
     'cancelled' => 'Cancelled',
     'order_details' => 'Order Details',
     'order_added_successfully' => 'Order Added Successfully',
+    'print' => 'Print',
 
 ];
