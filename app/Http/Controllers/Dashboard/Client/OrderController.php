@@ -11,6 +11,15 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class OrderController extends Controller
 {
+
+    public function __construct()
+    {
+        // $this->middleware(['permission:orders_read'])->only('index', 'export');
+        $this->middleware(['permission:orders_create'])->only('create');
+        // $this->middleware(['permission:orders_update'])->only('edit');
+        // $this->middleware(['permission:orders_delete'])->only(['destroy', 'restore', 'forceDelete', 'deleteAll']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -44,12 +53,14 @@ class OrderController extends Controller
 
         // dd($validatedData);
 
+        // Orders Table
         $order = $client->orders()->create([
             'client_id' => $client->id,
             // 'total_price' => $request->total_price,
             // 'status' => 'pending',
         ]);
 
+        // product_order_pivot Table
         $order->products()->attach($request->products);
 
         $total_price = 0;
@@ -58,11 +69,13 @@ class OrderController extends Controller
             // dd($quantity); // array("quantity" => "1")
             $product = Product::findOrFail($id);
             $total_price += $quantity['quantity'] * $product->currentSalePrice->sale_price;
+            // update product stock - Products Table
             $product->update([
                 'stock' => $product->stock - $quantity['quantity'],
             ]);
         }
 
+        // update total_price - Orders Table
         $order->update([
             'total_price' => $total_price,
         ]);

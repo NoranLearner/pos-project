@@ -8,12 +8,21 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:orders_read'])->only('index');
+        // $this->middleware(['permission:orders_read'])->only('index', 'export');
+        // $this->middleware(['permission:orders_create'])->only('create');
+        // $this->middleware(['permission:orders_update'])->only('edit');
+        // $this->middleware(['permission:orders_delete'])->only(['destroy', 'restore', 'forceDelete', 'deleteAll']);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $orders = Order::latest()->paginate(5);
+        return view('dashboard.orders.index', compact('orders'));
     }
 
     /**
