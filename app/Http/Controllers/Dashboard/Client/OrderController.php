@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class OrderController extends Controller
@@ -16,7 +17,7 @@ class OrderController extends Controller
     {
         // $this->middleware(['permission:orders_read'])->only('index', 'export');
         $this->middleware(['permission:orders_create'])->only('create');
-        // $this->middleware(['permission:orders_update'])->only('edit');
+        $this->middleware(['permission:orders_update'])->only('edit');
         // $this->middleware(['permission:orders_delete'])->only(['destroy', 'restore', 'forceDelete', 'deleteAll']);
     }
 
@@ -96,9 +97,10 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Client $client, Order $order)
     {
-        //
+        $categories = Category::with('products')->get();
+        return view('dashboard.clients.orders.edit', compact('client', 'order', 'categories'));
     }
 
     /**

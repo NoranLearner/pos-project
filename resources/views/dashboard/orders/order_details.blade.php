@@ -1,5 +1,6 @@
 <p><strong>@lang('site.client_name') : </strong> {{ $order->client->name }}</p>
-<p><strong>@lang('site.created_at') : </strong> {{ $order->created_at->toFormattedDateString() }}</p>
+{{-- ->toFormattedDateString() --}}
+<p><strong>@lang('site.created_at') : </strong> {{ $order->created_at->format('F j, Y h:i A') }}</p>
 <p><strong>@lang('site.order_status') : </strong> {{ __('site.' . $order->status) }}</p>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
