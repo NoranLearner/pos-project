@@ -62,10 +62,10 @@ Route::group(
             Route::delete('clients/{id}/forceDelete', [ClientController::class, 'forceDelete'])->name('clients.forceDelete');
             Route::delete('clients-delete-all', [ClientController::class, 'deleteAll'])->name('clients.deleteAll');
             Route::resource('clients.orders', ClientOrderController::class);
+            Route::put('orders/{id}/change-status', [ClientOrderController::class, 'change_status'])->name('orders.status');
 
             // Orders Routes
             Route::resource('/orders', OrderController::class)->names('orders');
-            // Route::get('orders/{id}/products', [OrderController::class, 'products'])->name('orders.products');
 
         }); // end of dashboard routes
 

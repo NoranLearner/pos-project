@@ -17,7 +17,7 @@ class OrderController extends Controller
     {
         // $this->middleware(['permission:orders_read'])->only('index', 'export');
         $this->middleware(['permission:orders_create'])->only('create');
-        $this->middleware(['permission:orders_update'])->only('edit');
+        $this->middleware(['permission:orders_update'])->only('edit', 'change_status');
         // $this->middleware(['permission:orders_delete'])->only(['destroy', 'restore', 'forceDelete', 'deleteAll']);
     }
 
@@ -158,6 +158,17 @@ class OrderController extends Controller
             'total_price' => $total_price,
         ]);
 
+        Alert::toast(__('site.order_updated_successfully'), 'success')->timerProgressBar();
+
+        return redirect()->route('dashboard.orders.index');
+    }
+
+    public function change_status(Request $request){
+        // dd($request->all());
+        $order = Order::find($request->order_id);
+        $order->update([
+            'status' => $request->status,
+        ]);
         Alert::toast(__('site.order_updated_successfully'), 'success')->timerProgressBar();
 
         return redirect()->route('dashboard.orders.index');

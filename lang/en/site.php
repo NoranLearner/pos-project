@@ -126,6 +126,8 @@ return [
     'currency' => 'Egyptian Pound',
     'order_total' => 'Order Total',
     'order_status' => 'Order Status',
+    'change_status' => 'Change Status',
+    'select_status' => 'Select Status',
     'pending' => 'Pending',
     'completed' => 'Completed',
     'cancelled' => 'Cancelled',

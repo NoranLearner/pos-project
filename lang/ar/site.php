@@ -126,6 +126,8 @@ return [
     'currency' => 'جنيه',
     'order_total' => 'المجموع',
     'order_status' => 'حالة الطلب',
+    'change_status' => 'تغيير الحالة',
+    'select_status' => 'اختر حالة',
     'pending' => 'قيد الانتظار',
     'completed' => 'مكتمل',
     'cancelled' => 'ملغي',

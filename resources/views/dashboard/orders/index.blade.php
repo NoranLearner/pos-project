@@ -172,6 +172,14 @@
                                                         <span class="text-green-500">@lang('site.completed')</span>
 
                                                     @endif
+
+                                                    @if (auth()->user()->hasPermission('orders_update'))
+                                                        <button class="btn btn-link hover:no-underline focus:no-underline" data-toggle="modal" data-target="#editStatusModal{{ $order->id }}">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                        @include('partials.modal.orders.edit_status', ['order' => $order])
+                                                    @endif
+
                                                 </div>
                                             </td>
 
