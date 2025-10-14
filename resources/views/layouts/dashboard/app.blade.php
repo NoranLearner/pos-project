@@ -83,6 +83,11 @@
                 transform: rotate(360deg);
             }
         } */
+        @media print{
+            .printButton{
+                display: none;
+            }
+        }
     </style>
 
     {{--<!-- jQuery 3 -->--}}

@@ -260,7 +260,7 @@
 
                 <div class="box-body">
                     {{-- @include('dashboard.orders.order_details') --}}
-                    <div id="myOrderDetails"></div>
+                    <div id="myOrderDetails" class="print"></div>
                 </div>
 
             </div>

@@ -67,6 +67,7 @@ $(document).ready(function () {
             method: method,
             success: function (data) {
                 // alert(data);
+                $('#myOrderDetails').empty();
                 // $('.orderDetailsList').append(data);
                 // $('.orderDetailsList').html(data);
                 $('#myOrderDetails').html(data).hide().fadeIn(300);
@@ -75,6 +76,21 @@ $(document).ready(function () {
                 console.log(error);
             }
         });
+
+    });
+
+    $(document).on('click', '.printButton', function (e) {
+
+        e.preventDefault();
+
+        // var printContents = document.getElementsByClassName('print').innerHTML;
+        // var printContents = document.getElementById('myOrderDetails').innerHTML;
+        var printContents = document.querySelector('.print').innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        // location.reload();
 
     });
 
