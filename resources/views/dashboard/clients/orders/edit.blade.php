@@ -9,7 +9,7 @@
         <section class="content-header">
 
             <ol class="breadcrumb !static !float-left rtl:!float-right !text-xl">
-                <li><a href="{{ route('dashboard.clients.index') }}"><i class="fa fa-ticket"></i> @lang('site.clients')</a>
+                <li><a href="{{ route('dashboard.orders.index') }}"><i class="fa fa-ticket"></i> @lang('site.orders')</a>
                 </li>
                 <li class="active">@lang('site.order_edit')</li>
             </ol>

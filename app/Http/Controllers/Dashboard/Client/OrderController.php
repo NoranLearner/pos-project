@@ -106,9 +106,61 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Client $client, Order $order)
     {
-        //
+        // dd($request->all());
+
+        $validatedData =  $request->validate([
+            'products' => 'required|array|min:1',
+            'products.*.quantity' => 'required|numeric|min:1',
+            'products.*.id' => 'exists:products,id',
+        ]);
+
+        // dd($validatedData);
+
+        // Remove The Old Order
+
+        foreach ($order->products as $product) {
+            // update product stock - Products Table
+            $product->update([
+                'stock' => $product->stock + $product->pivot->quantity,
+            ]);
+        }
+
+        $order->delete();
+
+        // Create New Order
+
+        // Orders Table
+        $order = $client->orders()->create([
+            'client_id' => $client->id,
+            // 'total_price' => $request->total_price,
+            // 'status' => 'pending',
+        ]);
+
+        // product_order_pivot Table
+        $order->products()->attach($request->products);
+
+        $total_price = 0;
+
+        foreach ($request->products as $id=>$quantity) {
+            // dd($quantity); // array("quantity" => "1")
+            $product = Product::findOrFail($id);
+            $total_price += $quantity['quantity'] * $product->currentSalePrice->sale_price;
+            // update product stock - Products Table
+            $product->update([
+                'stock' => $product->stock - $quantity['quantity'],
+            ]);
+        }
+
+        // update total_price - Orders Table
+        $order->update([
+            'total_price' => $total_price,
+        ]);
+
+        Alert::toast(__('site.order_updated_successfully'), 'success')->timerProgressBar();
+
+        return redirect()->route('dashboard.orders.index');
     }
 
     /**
