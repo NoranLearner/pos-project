@@ -112,4 +112,31 @@ class OrderController extends Controller
         Alert::toast(__('site.deleted_successfully'), 'warning')->timerProgressBar();
         return redirect()->route('dashboard.orders.index');
     }
+
+    public function deleteAll(Request $request)
+    {
+
+        // dd($request->delete_select_id);
+
+        $ids = explode(",", $request->delete_select_id);
+
+        foreach ($ids as $order_id) {
+
+            $order = Order::findOrFail($order_id);
+
+            foreach ($order->products as $product) {
+                // update product stock - Products Table
+                $product->update([
+                    'stock' => $product->stock + $product->pivot->quantity,
+                ]);
+            }
+
+            $order->delete();
+
+        }
+
+        Alert::toast(__('site.delete_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.orders.index');
+
+    }
 }

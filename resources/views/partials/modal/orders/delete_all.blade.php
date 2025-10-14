@@ -35,7 +35,7 @@
                 </button>
 
                 {{-- {{ LaravelLocalization::localizeURL(route('dashboard.users.deleteAll')) }} --}}
-                <form action="{{ route('dashboard.products.deleteAll') }}" method="POST" style="display:inline">
+                <form action="{{ route('dashboard.orders.deleteAll') }}" method="POST" style="display:inline">
                     @csrf
                     @method('DELETE')
                     <input type="hidden" id="delete_select_id" name="delete_select_id" value=''>

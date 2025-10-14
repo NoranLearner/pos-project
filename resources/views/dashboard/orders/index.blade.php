@@ -43,7 +43,7 @@
                                     class="btn mx-4 btn-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
                                     <i class="fa fa-trash"></i> @lang('site.delete_all')
                                 </button>
-                                {{-- @include('partials.modal.clients.delete_all') --}}
+                                @include('partials.modal.orders.delete_all')
                             @else
                                 <button class="btn m-4 btn-danger opacity-50 cursor-not-allowed hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">
                                     <i class="fa fa-trash"></i> @lang('site.delete_all')

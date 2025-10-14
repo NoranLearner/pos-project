@@ -66,6 +66,7 @@ Route::group(
 
             // Orders Routes
             Route::resource('/orders', OrderController::class)->names('orders');
+            Route::delete('orders-delete-all', [OrderController::class, 'deleteAll'])->name('orders.deleteAll');
 
         }); // end of dashboard routes
 
