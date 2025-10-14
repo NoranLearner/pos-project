@@ -41,7 +41,9 @@ $(document).ready(function () {
 
     });
 
-    $(document).on('keyup change', '.productQuantity', function () {
+    $(document).on('keyup change', '.productQuantity', function (e) {
+
+        e.preventDefault();
 
         var quantity = parseFloat($(this).val());
 

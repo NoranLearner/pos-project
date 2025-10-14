@@ -99,7 +99,7 @@
                                                                 {{-- For Action --}}
                                                                 <td class="px-6 py-4">
                                                                     <div class="font-normal text-gray-500">
-                                                                        <a href=""
+                                                                        <a href="#"
                                                                             id="product-{{ $product->id }}"
                                                                             data-id="{{ $product->id }}"
                                                                             data-name="{{ $product->name }}"

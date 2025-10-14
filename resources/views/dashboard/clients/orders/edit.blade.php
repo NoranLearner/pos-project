@@ -105,14 +105,14 @@
                                                                 {{-- For Action --}}
                                                                 <td class="px-6 py-4">
                                                                     <div class="font-normal text-gray-500">
-                                                                        <a href=""
+                                                                        <a href="#"
                                                                             id="product-{{ $product->id }}"
                                                                             data-id="{{ $product->id }}"
                                                                             data-name="{{ $product->name }}"
                                                                             data-price="{{ $product->currentSalePrice->sale_price }}"
                                                                             data-translation="{{ __('site.delete') }}"
-                                                                            class="btn m-4 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none
-                                                                                    {{ in_array($product->id, $order->products->pluck('id')->toArray()) ? 'disabled bg-gray-500 !opacity-40' : 'addProductButton bg-green-500 hover:bg-green-600 focus:ring-green-300' }}">
+                                                                            class="addProductButton btn m-4 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none
+                                                                                    {{ in_array($product->id, $order->products->pluck('id')->toArray()) ? 'disabled bg-gray-500 !opacity-40' : 'bg-green-500 hover:bg-green-600 focus:ring-green-300' }}">
                                                                             <i class="fa fa-plus"></i> @lang('site.add')
                                                                         </a>
                                                                     </div>
