@@ -5,16 +5,17 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class OrderController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['permission:orders_read'])->only('index');
+        $this->middleware(['permission:orders_read'])->only('index', 'show');
         // $this->middleware(['permission:orders_read'])->only('index', 'export');
         // $this->middleware(['permission:orders_create'])->only('create');
         // $this->middleware(['permission:orders_update'])->only('edit');
-        // $this->middleware(['permission:orders_delete'])->only(['destroy', 'restore', 'forceDelete', 'deleteAll']);
+        $this->middleware(['permission:orders_delete'])->only(['destroy', 'deleteAll']);
     }
     /**
      * Display a listing of the resource.
@@ -99,6 +100,16 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        foreach ($order->products as $product) {
+            // update product stock - Products Table
+            $product->update([
+                'stock' => $product->stock + $product->pivot->quantity,
+            ]);
+        }
+
+        $order->delete();
+
+        Alert::toast(__('site.deleted_successfully'), 'warning')->timerProgressBar();
+        return redirect()->route('dashboard.orders.index');
     }
 }

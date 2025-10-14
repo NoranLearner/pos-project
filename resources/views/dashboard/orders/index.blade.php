@@ -163,7 +163,7 @@
 
                                                         <span class="text-yellow-500">@lang('site.pending')</span>
 
-                                                    @elseif ( $order->status == 'canceled' )
+                                                    @elseif ( $order->status == 'cancelled' )
 
                                                         <span class="text-red-500">@lang('site.cancelled')</span>
 
@@ -226,7 +226,7 @@
                                                         data-toggle="modal" data-target="#deleteModal-{{ $order->id }}">
                                                         <i class="fa fa-trash"></i> @lang('site.delete')
                                                     </button>
-                                                    {{-- @include('partials.modal.categories.delete', ['category' => $category]) --}}
+                                                    @include('partials.modal.orders.delete', ['order' => $order])
 
                                                 @else
                                                     <button class="btn btn-danger opacity-50 cursor-not-allowed hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-red-300">

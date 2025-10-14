@@ -134,6 +134,7 @@ return [
     'order_details' => 'Order Details',
     'order_added_successfully' => 'Order Added Successfully',
     'order_updated_successfully' => 'Order Updated Successfully',
+    'delete_order_warning' => 'Are you sure you want to delete this order?',
     'print' => 'Print',
 
 ];
