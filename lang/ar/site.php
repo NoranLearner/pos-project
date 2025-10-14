@@ -136,4 +136,11 @@ return [
     'order_updated_successfully' => 'تم تعديل الطلب بنجاح',
     'delete_order_warning' => 'هل تريد حذف هذا الطلب؟',
     'print' => 'طباعة',
+
+    // Home
+    'total_admins' => 'عدد المشرفين',
+    'total_categories' => 'عدد الاقسام',
+    'total_products' => 'عدد المنتجات',
+    'total_clients' => 'عدد العملاء',
+    'total_orders' => 'عدد الطلبات',
 ];

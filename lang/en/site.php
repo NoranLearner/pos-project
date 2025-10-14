@@ -137,4 +137,11 @@ return [
     'delete_order_warning' => 'Are you sure you want to delete this order?',
     'print' => 'Print',
 
+    // Home
+    'total_admins' => 'Total Admins',
+    'total_categories' => 'Total Categories',
+    'total_products' => 'Total Products',
+    'total_clients' => 'Total Clients',
+    'total_orders' => 'Total Orders',
+
 ];
