@@ -232,7 +232,8 @@
 
                         <div class="flex justify-center">
                             <button
-                                class="w-full btn m-4 bg-blue-500 hover:bg-blue-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-300">
+                                id="editOrder"
+                                class="w-full btn m-4 bg-blue-500 hover:bg-blue-600 text-white hover:text-white font-medium py-2 px-4 rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-300" >
                                 <i class="fa fa-edit"></i> @lang('site.order_edit')
                             </button>
                         </div>
