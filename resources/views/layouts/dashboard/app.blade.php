@@ -371,6 +371,10 @@
     {{-- For Orders --}}
     <script src="{{ asset('dashboard_files/js/custom/order.js') }}"></script>
 
+    {{-- chart.js Library --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>import Chart from 'chart.js/auto';</script>
+
     {{-- For Data Table --}}
     {{-- <script src="https://cdn.datatables.net/v/bs/jszip-3.10.1/dt-2.3.4/b-3.2.5/b-html5-3.2.5/b-print-3.2.5/datatables.min.js" integrity="sha384-IEtxkDm+KXERTtDz8EHbs07Sv0r31HyNom4p+ttbsrVtleKUaliHVljXBEmSswhZ" crossorigin="anonymous"></script> --}}
 

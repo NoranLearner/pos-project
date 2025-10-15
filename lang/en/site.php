@@ -143,5 +143,12 @@ return [
     'total_products' => 'Total Products',
     'total_clients' => 'Total Clients',
     'total_orders' => 'Total Orders',
+    'orders_today' => 'Orders Today',
+    'total_orders_today' => 'Total Orders Today',
+    'total_orders_this_month' => 'Total Orders This Month',
+    'total_orders_this_year' => 'Total Orders This Year',
+    'completed_orders' => 'Completed Orders',
+    'pending_orders' => 'Pending Orders',
+    'cancelled_orders' => 'Cancelled Orders',
 
 ];

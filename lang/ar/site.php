@@ -143,4 +143,11 @@ return [
     'total_products' => 'عدد المنتجات',
     'total_clients' => 'عدد العملاء',
     'total_orders' => 'عدد الطلبات',
+    'orders_today' => 'الطلبات اليوميه',
+    'total_orders_today' => 'عدد الطلبات اليوميه',
+    'total_orders_this_month' => 'عدد الطلبات الشهريه',
+    'total_orders_this_year' => 'عدد الطلبات السنويه',
+    'completed_orders' => 'الطلبات المكتمله',
+    'pending_orders' => 'الطلبات المعلقه',
+    'cancelled_orders' => 'الطلبات الملغيه',
 ];
