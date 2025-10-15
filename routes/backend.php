@@ -36,6 +36,7 @@ Route::group(
         Route::prefix('dashboard')->name('dashboard.')->group(function () {
 
             Route::get('/index', [DashboardController::class, 'index'])->name('index');
+            Route::get('/sales', [DashboardController::class, 'sales'])->name('sales');
 
             // Users Routes
             Route::resource('/users', UserController::class)->names('users');
