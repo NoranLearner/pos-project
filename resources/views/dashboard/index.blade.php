@@ -157,9 +157,11 @@
 
                         <div class="bg-white border-transparent rounded-lg shadow-xl">
 
-                            <div
-                                class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-3">
-                                <h2 class="font-bold uppercase text-gray-600">@lang('site.today_sales')</h2>
+                            <div class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-3">
+                                <h2 class="font-bold uppercase text-gray-600 inline-block">@lang('site.sales')</h2>
+                                <button type="button" class="sale_chart bg-green-100 text-green-800 text-base font-semibold mx-2 px-2.5 py-0.5 rounded-sm" data-period="day">@lang('site.daily')</button>
+                                <button type="button" class="sale_chart bg-yellow-100 text-yellow-800 text-base font-semibold mx-2 px-2.5 py-0.5 rounded-sm" data-period="month">@lang('site.monthly')</button>
+                                <button type="button" class="sale_chart bg-pink-100 text-pink-800 text-base font-semibold mx-2 px-2.5 py-0.5 rounded-sm" data-period="year">@lang('site.yearly')</button>
                             </div>
 
                             <div class="p-5">
@@ -220,10 +222,20 @@
 
         const ctx = document.getElementById('barChart').getContext('2d');
 
-        fetch("{{ route('dashboard.sales') }}")
+        let chartInstance = null;
+
+        function displayChart(period = 'day'){
+
+            fetch("{{ route('dashboard.sales') }}?period=" + period)
             .then(response => response.json())
             .then(json => {
-                const barChart = new Chart(ctx, {
+
+                if (chartInstance) {
+                    chartInstance.destroy();
+                }
+
+                chartInstance = new Chart(ctx, {
+
                     type: 'bar',
                     data: {
                         labels: json.labels,
@@ -237,7 +249,12 @@
                                 "rgba(75, 192, 192, 0.6)",
                                 "rgba(54, 162, 235, 0.6)",
                                 "rgba(153, 102, 255, 0.6)",
-                                "rgba(201, 203, 207, 0.6)"
+                                "rgba(201, 203, 207, 0.6)",
+                                "rgba(255, 99, 132, 0.6)",
+                                "rgba(255, 159, 64, 0.6)",
+                                "rgba(255, 205, 86, 0.6)",
+                                "rgba(75, 192, 192, 0.6)",
+                                "rgba(54, 162, 235, 0.6)",
                             ],
                             borderColor: [
                                 "rgba(255, 99, 132, 1)",
@@ -246,7 +263,12 @@
                                 "rgba(75, 192, 192, 1)",
                                 "rgba(54, 162, 235, 1)",
                                 "rgba(153, 102, 255, 1)",
-                                "rgba(201, 203, 207, 1)"
+                                "rgba(201, 203, 207, 1)",
+                                "rgba(255, 99, 132, 1)",
+                                "rgba(255, 159, 64, 1)",
+                                "rgba(255, 205, 86, 1)",
+                                "rgba(75, 192, 192, 1)",
+                                "rgba(54, 162, 235, 1)",
                             ],
                             borderWidth: 1,
                         }]
@@ -267,6 +289,19 @@
                     }
                 });
             })
+            .catch(error => console.error('Chart fetch error:', error));
+
+        }
+
+        $(document).on('click', '.sale_chart', function (e) {
+
+            e.preventDefault();
+
+            displayChart($(this).data('period'));
+
+        });
+
+        displayChart();
 
         // For Bie Chart
 

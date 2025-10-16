@@ -34,32 +34,68 @@ class DashboardController extends Controller
         return view('dashboard.index', compact('users_count', 'categories_count', 'products_count', 'clients_count', 'orders_count', 'orders_labels', 'orders_data'));
     }
 
-    public function sales()
+    public function sales(Request $request)
     {
         // https://www.youtube.com/watch?v=rv16bmm9TDY
 
-        // whereYear('created_at', 2025)
-        // $sales_data = Order::select([
-        //     DB::raw('Day(created_at) as day'),
-        //     DB::raw('Month(created_at) as month'),
-        //     DB::raw('Year(created_at) as year'),
-        //     DB::raw('SUM(total_price) as total'),
-        // ])->groupBy('day', 'month', 'year')->orderBy('day')->get();
+        $period = $request->query('period', 'day');
 
-        $sales_data = Order::select([
-            DB::raw('DAYOFWEEK(created_at) as weekday'),
-            DB::raw('SUM(total_price) as total'),
-        ])
-        ->groupBy('weekday')
-        ->orderBy('weekday')
-        ->get();
+        switch ($period) {
 
-        $labels = [1=>'Sunday', 2=>'Monday', 3=>'Tuesday', 4=>'Wednesday', 5=>'Thursday', 6=>'Friday', 7=>'Saturday'];
+            // For Month
+
+            case 'month':
+
+                $sales_data = Order::select([
+                    DB::raw('Month(created_at) as period'),
+                    DB::raw('SUM(total_price) as total'),
+                ])
+                ->groupBy('period')
+                ->orderBy('period')
+                ->get();
+
+                $labels = [1=>'January', 2=>'February', 3=>'March', 4=>'April', 5=>'May', 6=>'June', 7=>'July', 8=>'August', 9=>'September', 10=>'October', 11=>'November', 12=>'December'];
+
+                break;
+
+            // For Year
+
+            case 'year':
+
+                $sales_data = Order::select([
+                    DB::raw('Year(created_at) as period'),
+                    DB::raw('SUM(total_price) as total'),
+                ])
+                ->groupBy('period')
+                ->orderBy('period')
+                ->get();
+
+                // $labels = [1=>'2021', 2=>'2022', 3=>'2023', 4=>'2024', 5=>'2025', 6=>'2026', 7=>'2027', 8=>'2028', 9=>'2029', 10=>'2030'];
+                $labels = $sales_data->pluck('period', 'period')->toArray();
+
+                break;
+
+            // For Day Default
+            default:
+
+                $sales_data = Order::select([
+                    DB::raw('DAYOFWEEK(created_at) as period'),
+                    DB::raw('SUM(total_price) as total'),
+                ])
+                ->groupBy('period')
+                ->orderBy('period')
+                ->get();
+
+                $labels = [1=>'Sunday', 2=>'Monday', 3=>'Tuesday', 4=>'Wednesday', 5=>'Thursday', 6=>'Friday', 7=>'Saturday'];
+
+                break;
+
+        }
 
         $total = [];
 
         foreach ($sales_data as $key => $value) {
-            $total[$value->weekday] = $value->total;
+            $total[$value->period] = $value->total;
         }
 
         foreach ($labels as $key1 => $value1) {
@@ -71,6 +107,7 @@ class DashboardController extends Controller
         ksort($total);
 
         return [
+            'period' => $period,
             'labels' => array_values($labels),
             'datasets' => [
                 'label' => 'Total Sales',
