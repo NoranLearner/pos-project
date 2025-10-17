@@ -36,18 +36,24 @@ class UserController extends Controller
         if ($user->hasRole('super_admin')) {
 
             $users = User::whereHasRole(['user', 'admin', 'super_admin'])->where(function ($q) use ($request) {
-                return $q->when($request->search, function ($query) use ($request) {
+                $q->when($request->search, function ($query) use ($request) {
                     return $query->where('name', 'like', '%' . $request->search . '%')
-                        ->orWhere('email', 'like', '%' . $request->search . '%');
+                        ->orWhere('email', 'like', '%' . $request->search . '%')
+                        ->orWhereHas('roles', function ($roleQuery) use ($request) {
+                            $roleQuery->where('name', 'like', '%' . $request->search . '%');
+                        });
                 });
             })->latest()->paginate(8);
 
         } else {
 
             $users = User::whereHasRole(['user', 'admin'])->where(function ($q) use ($request) {
-                return $q->when($request->search, function ($query) use ($request) {
+                $q->when($request->search, function ($query) use ($request) {
                     return $query->where('name', 'like', '%' . $request->search . '%')
-                        ->orWhere('email', 'like', '%' . $request->search . '%');
+                        ->orWhere('email', 'like', '%' . $request->search . '%')
+                        ->orWhereHas('roles', function ($roleQuery) use ($request) {
+                            $roleQuery->where('name', 'like', '%' . $request->search . '%');
+                        });
                 });
             })->orderBy('created_at', 'desc')->paginate(8);
 
